@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>worldline.acquiring.sdk.v1.acquirer.merchant.accountverifications.account_verifications_client &#8212; acquiring-sdk-python 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/basic.css?v=c058f7c8" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../../../../../../../_static/documentation_options.js?v=01f34227"></script>
+    <script src="../../../../../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../../../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for worldline.acquiring.sdk.v1.acquirer.merchant.accountverifications.account_verifications_client</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1">#</span>
+<span class="c1"># This file was automatically generated.</span>
+<span class="c1">#</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">worldline.acquiring.sdk.api_resource</span> <span class="kn">import</span> <span class="n">ApiResource</span>
+<span class="kn">from</span> <span class="nn">worldline.acquiring.sdk.call_context</span> <span class="kn">import</span> <span class="n">CallContext</span>
+<span class="kn">from</span> <span class="nn">worldline.acquiring.sdk.communication.response_exception</span> <span class="kn">import</span> <span class="n">ResponseException</span>
+<span class="kn">from</span> <span class="nn">worldline.acquiring.sdk.v1.domain.api_account_verification_request</span> <span class="kn">import</span> <span class="n">ApiAccountVerificationRequest</span>
+<span class="kn">from</span> <span class="nn">worldline.acquiring.sdk.v1.domain.api_account_verification_response</span> <span class="kn">import</span> <span class="n">ApiAccountVerificationResponse</span>
+<span class="kn">from</span> <span class="nn">worldline.acquiring.sdk.v1.domain.api_payment_error_response</span> <span class="kn">import</span> <span class="n">ApiPaymentErrorResponse</span>
+<span class="kn">from</span> <span class="nn">worldline.acquiring.sdk.v1.exception_factory</span> <span class="kn">import</span> <span class="n">create_exception</span>
+
+
+<div class="viewcode-block" id="AccountVerificationsClient">
+<a class="viewcode-back" href="../../../../../../../../index.html#worldline.acquiring.sdk.v1.acquirer.merchant.accountverifications.account_verifications_client.AccountVerificationsClient">[docs]</a>
+<span class="k">class</span> <span class="nc">AccountVerificationsClient</span><span class="p">(</span><span class="n">ApiResource</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    AccountVerifications client. Thread-safe.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AccountVerificationsClient.__init__">
+<a class="viewcode-back" href="../../../../../../../../index.html#worldline.acquiring.sdk.v1.acquirer.merchant.accountverifications.account_verifications_client.AccountVerificationsClient.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">ApiResource</span><span class="p">,</span> <span class="n">path_context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param parent:       :class:`worldline.acquiring.sdk.api_resource.ApiResource`</span>
+<span class="sd">        :param path_context: Mapping[str, str]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AccountVerificationsClient</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">,</span> <span class="n">path_context</span><span class="o">=</span><span class="n">path_context</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AccountVerificationsClient.process_account_verification">
+<a class="viewcode-back" href="../../../../../../../../index.html#worldline.acquiring.sdk.v1.acquirer.merchant.accountverifications.account_verifications_client.AccountVerificationsClient.process_account_verification">[docs]</a>
+    <span class="k">def</span> <span class="nf">process_account_verification</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="n">ApiAccountVerificationRequest</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CallContext</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ApiAccountVerificationResponse</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resource /processing/v1/{acquirerId}/{merchantId}/account-verifications - Verify account</span>
+
+<span class="sd">        See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Account-Verifications/operation/processAccountVerification</span>
+
+<span class="sd">        :param body:     :class:`worldline.acquiring.sdk.v1.domain.api_account_verification_request.ApiAccountVerificationRequest`</span>
+<span class="sd">        :param context:  :class:`worldline.acquiring.sdk.call_context.CallContext`</span>
+<span class="sd">        :return: :class:`worldline.acquiring.sdk.v1.domain.api_account_verification_response.ApiAccountVerificationResponse`</span>
+<span class="sd">        :raise ValidationException: if the request was not correct and couldn&#39;t be processed (HTTP status code 400)</span>
+<span class="sd">        :raise AuthorizationException: if the request was not allowed (HTTP status code 403)</span>
+<span class="sd">        :raise ReferenceException: if an object was attempted to be referenced that doesn&#39;t exist or has been removed,</span>
+<span class="sd">                   or there was a conflict (HTTP status code 404, 409 or 410)</span>
+<span class="sd">        :raise PlatformException: if something went wrong at the Worldline Acquiring platform,</span>
+<span class="sd">                   the Worldline Acquiring platform was unable to process a message from a downstream partner/acquirer,</span>
+<span class="sd">                   or the service that you&#39;re trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)</span>
+<span class="sd">        :raise ApiException: if the Worldline Acquiring platform returned any other error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">uri</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instantiate_uri</span><span class="p">(</span><span class="s2">&quot;/processing/v1/</span><span class="si">{acquirerId}</span><span class="s2">/</span><span class="si">{merchantId}</span><span class="s2">/account-verifications&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_communicator</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+                    <span class="n">uri</span><span class="p">,</span>
+                    <span class="kc">None</span><span class="p">,</span>
+                    <span class="kc">None</span><span class="p">,</span>
+                    <span class="n">body</span><span class="p">,</span>
+                    <span class="n">ApiAccountVerificationResponse</span><span class="p">,</span>
+                    <span class="n">context</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">ResponseException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">error_type</span> <span class="o">=</span> <span class="n">ApiPaymentErrorResponse</span>
+            <span class="n">error_object</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_communicator</span><span class="o">.</span><span class="n">marshaller</span><span class="o">.</span><span class="n">unmarshal</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">body</span><span class="p">,</span> <span class="n">error_type</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">create_exception</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">body</span><span class="p">,</span> <span class="n">error_object</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../../../../../index.html">acquiring-sdk-python</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;Copyright (c) 2024 Worldline Financial Services (Europe) SA.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

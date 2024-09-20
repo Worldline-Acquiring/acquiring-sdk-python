@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>worldline.acquiring.sdk.authentication.oauth2_authenticator &#8212; acquiring-sdk-python 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/basic.css?v=c058f7c8" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../../../../_static/documentation_options.js?v=01f34227"></script>
+    <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for worldline.acquiring.sdk.authentication.oauth2_authenticator</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">loads</span>
+<span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Lock</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">ParseResult</span>
+
+<span class="kn">from</span> <span class="nn">.authenticator</span> <span class="kn">import</span> <span class="n">Authenticator</span>
+<span class="kn">from</span> <span class="nn">.oauth2_exception</span> <span class="kn">import</span> <span class="n">OAuth2Exception</span>
+
+<span class="kn">from</span> <span class="nn">worldline.acquiring.sdk.communicator_configuration</span> <span class="kn">import</span> <span class="n">CommunicatorConfiguration</span>
+<span class="kn">from</span> <span class="nn">worldline.acquiring.sdk.communication.default_connection</span> <span class="kn">import</span> <span class="n">DefaultConnection</span>
+<span class="kn">from</span> <span class="nn">worldline.acquiring.sdk.communication.request_header</span> <span class="kn">import</span> <span class="n">RequestHeader</span>
+
+
+<div class="viewcode-block" id="OAuth2Authenticator">
+<a class="viewcode-back" href="../../../../../index.html#worldline.acquiring.sdk.authentication.oauth2_authenticator.OAuth2Authenticator">[docs]</a>
+<span class="k">class</span> <span class="nc">OAuth2Authenticator</span><span class="p">(</span><span class="n">Authenticator</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    OAuth2 Authenticator implementation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="OAuth2Authenticator.__init__">
+<a class="viewcode-back" href="../../../../../index.html#worldline.acquiring.sdk.authentication.oauth2_authenticator.OAuth2Authenticator.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">communicator_configuration</span><span class="p">:</span> <span class="n">CommunicatorConfiguration</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs a new OAuth2Authenticator instance using the provided CommunicatorConfiguration.</span>
+
+<span class="sd">        :param communicator_configuration: The configuration object containing the OAuth2 client id, client secret</span>
+<span class="sd">         and token URI, connection timeout, and socket timeout. None of these can be None or empty,</span>
+<span class="sd">         and the timeout values must be positive.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Authenticator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">communicator_configuration</span><span class="o">.</span><span class="n">oauth2_client_id</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;oauth2_client_id is required&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">communicator_configuration</span><span class="o">.</span><span class="n">oauth2_client_secret</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;oauth2_client_secret is required&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">communicator_configuration</span><span class="o">.</span><span class="n">oauth2_token_uri</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;oauth2_client_token_uri is required&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">communicator_configuration</span><span class="o">.</span><span class="n">connect_timeout</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;connect_timeout must be positive&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">communicator_configuration</span><span class="o">.</span><span class="n">socket_timeout</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;socket_timeout must be positive&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__client_id</span> <span class="o">=</span> <span class="n">communicator_configuration</span><span class="o">.</span><span class="n">oauth2_client_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__client_secret</span> <span class="o">=</span> <span class="n">communicator_configuration</span><span class="o">.</span><span class="n">oauth2_client_secret</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__token_uri</span> <span class="o">=</span> <span class="n">communicator_configuration</span><span class="o">.</span><span class="n">oauth2_token_uri</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__connect_timeout</span> <span class="o">=</span> <span class="n">communicator_configuration</span><span class="o">.</span><span class="n">connect_timeout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__socket_timeout</span> <span class="o">=</span> <span class="n">communicator_configuration</span><span class="o">.</span><span class="n">socket_timeout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__proxy_configuration</span> <span class="o">=</span> <span class="n">communicator_configuration</span><span class="o">.</span><span class="n">proxy_configuration</span>
+
+        <span class="c1"># Only a limited amount of scopes may be sent in one request.</span>
+        <span class="c1"># While at the moment all scopes fit in one request, keep this code so we can easily add more token types if necessary.</span>
+        <span class="c1"># The empty path will ensure that all paths will match, as each full path ends with an empty string.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__access_tokens</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__TokenType</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;processing_payment&quot;</span><span class="p">,</span> <span class="s2">&quot;processing_refund&quot;</span><span class="p">,</span> <span class="s2">&quot;processing_credittransfer&quot;</span><span class="p">,</span>
+                             <span class="s2">&quot;processing_accountverification&quot;</span><span class="p">,</span>
+                             <span class="s2">&quot;processing_operation_reverse&quot;</span><span class="p">,</span> <span class="s2">&quot;processing_dcc_rate&quot;</span><span class="p">,</span> <span class="s2">&quot;services_ping&quot;</span><span class="p">),</span>
+        <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="OAuth2Authenticator.get_authorization">
+<a class="viewcode-back" href="../../../../../index.html#worldline.acquiring.sdk.authentication.oauth2_authenticator.OAuth2Authenticator.get_authorization">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_authorization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">http_method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">resource_uri</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ParseResult</span><span class="p">],</span>
+                          <span class="n">request_headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">RequestHeader</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">token_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_token_type</span><span class="p">(</span><span class="n">resource_uri</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">token_type</span><span class="o">.</span><span class="n">lock</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">token_type</span><span class="o">.</span><span class="n">access_token</span> <span class="ow">or</span> <span class="n">token_type</span><span class="o">.</span><span class="n">access_token_expiration</span> <span class="o">&lt;</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">():</span>
+                <span class="n">token_type</span><span class="o">.</span><span class="n">access_token</span><span class="p">,</span> <span class="n">token_type</span><span class="o">.</span><span class="n">access_token_expiration</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_access_token</span><span class="p">(</span><span class="n">token_type</span><span class="o">.</span><span class="n">scopes</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="s2">&quot;Bearer &quot;</span> <span class="o">+</span> <span class="n">token_type</span><span class="o">.</span><span class="n">access_token</span></div>
+
+
+    <span class="k">def</span> <span class="nf">__get_access_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scopes</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">datetime</span><span class="p">]:</span>
+        <span class="k">with</span> <span class="n">DefaultConnection</span><span class="p">(</span><span class="n">connect_timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__connect_timeout</span><span class="p">,</span>
+                               <span class="n">socket_timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__socket_timeout</span><span class="p">,</span>
+                               <span class="n">max_connections</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                               <span class="n">proxy_configuration</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__proxy_configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+
+            <span class="n">request_headers</span> <span class="o">=</span> <span class="p">[</span><span class="n">RequestHeader</span><span class="p">(</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">,</span> <span class="s2">&quot;application/x-www-form-urlencoded&quot;</span><span class="p">)]</span>
+            <span class="n">body</span> <span class="o">=</span> <span class="s2">&quot;grant_type=client_credentials&amp;client_id=</span><span class="si">%s</span><span class="s2">&amp;client_secret=</span><span class="si">%s</span><span class="s2">&amp;scope=</span><span class="si">%s</span><span class="s2">&quot;</span> \
+                   <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__client_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__client_secret</span><span class="p">,</span> <span class="n">scopes</span><span class="p">)</span>
+
+            <span class="n">start_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+
+            <span class="n">status</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">chunks</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__token_uri</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
+            <span class="n">response_body</span> <span class="o">=</span> <span class="n">OAuth2Authenticator</span><span class="o">.</span><span class="n">__collect_chunks</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span>
+            <span class="n">access_token_response</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">response_body</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">status</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+                <span class="n">error_description</span> <span class="o">=</span> <span class="n">access_token_response</span><span class="p">[</span><span class="s2">&quot;error_description&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;error_description&quot;</span> <span class="ow">in</span> <span class="n">access_token_response</span> <span class="k">else</span> <span class="kc">None</span>
+                <span class="k">raise</span> <span class="n">OAuth2Exception</span><span class="p">(</span><span class="s2">&quot;There was an error while retrieving the OAuth2 access token: </span><span class="si">%s</span><span class="s2"> - </span><span class="si">%s</span><span class="s2">&quot;</span>
+                                      <span class="o">%</span> <span class="p">(</span><span class="n">access_token_response</span><span class="p">[</span><span class="s2">&quot;error&quot;</span><span class="p">],</span> <span class="n">error_description</span><span class="p">))</span>
+
+            <span class="n">expiration_time</span> <span class="o">=</span> <span class="n">start_time</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">access_token_response</span><span class="p">[</span><span class="s2">&quot;expires_in&quot;</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">access_token_response</span><span class="p">[</span><span class="s2">&quot;access_token&quot;</span><span class="p">],</span> <span class="n">expiration_time</span>
+
+<div class="viewcode-block" id="OAuth2Authenticator.get_token_type">
+<a class="viewcode-back" href="../../../../../index.html#worldline.acquiring.sdk.authentication.oauth2_authenticator.OAuth2Authenticator.get_token_type">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_token_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">token_type_entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__access_tokens</span><span class="p">:</span>
+            <span class="n">path_with_trailing_slash</span> <span class="o">=</span> <span class="n">token_type_entry</span><span class="o">.</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+            <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">token_type_entry</span><span class="o">.</span><span class="n">path</span><span class="p">)</span> <span class="ow">or</span> <span class="n">path_with_trailing_slash</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">token_type_entry</span>
+
+        <span class="k">raise</span> <span class="n">OAuth2Exception</span><span class="p">(</span><span class="s2">&quot;Scope could not be found for path &quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">)</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">__collect_chunks</span><span class="p">(</span><span class="n">chunks</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">bytes</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">collected_body</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">chunks</span><span class="p">:</span>
+            <span class="n">collected_body</span> <span class="o">+=</span> <span class="n">chunk</span>
+        <span class="k">return</span> <span class="n">collected_body</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">__TokenType</span><span class="p">:</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="o">*</span><span class="n">scopes</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scopes</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">scopes</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">access_token</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">access_token_expiration</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="c1"># Python does not provide a read-write lock implementation out-of-the-box.</span>
+            <span class="c1"># Use a simple Lock instead. That does mean that multiple reads have to wait on each other,</span>
+            <span class="c1"># but the read-only part is limited to checking the access token and its expiration timestamp,</span>
+            <span class="c1"># which should take only a very short time</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="n">Lock</span><span class="p">()</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../../index.html">acquiring-sdk-python</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;Copyright (c) 2024 Worldline Financial Services (Europe) SA.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
