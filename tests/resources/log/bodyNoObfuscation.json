@@ -1,0 +1,7 @@
+{
+    "amount": {
+        "currencyCode": "EUR",
+        "amount": 1000
+    },
+	"authorizationType": "PRE_AUTHORIZATION"
+}

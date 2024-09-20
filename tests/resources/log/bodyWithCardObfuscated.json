@@ -1,0 +1,13 @@
+{
+    "amount": {
+        "currencyCode": "CAD",
+        "amount": 2345
+    },
+	"cardPaymentData": {
+		"cardData": {
+			"cardSecurityCode": "***",
+			"cardNumber": "************3456",
+			"expiryDate": "**2024"
+		}
+	}
+}
