@@ -4,25 +4,21 @@
 #
 from typing import Optional
 
-from .card_on_file_data import CardOnFileData
-from .e_commerce_data_for_account_verification import ECommerceDataForAccountVerification
-from .network_token_data import NetworkTokenData
+from .e_commerce_data import ECommerceData
 from .plain_card_data import PlainCardData
 from .point_of_sale_data import PointOfSaleData
 
 from worldline.acquiring.sdk.domain.data_object import DataObject
 
 
-class CardPaymentDataForVerification(DataObject):
+class CardPaymentDataForBalanceInquiry(DataObject):
 
     __brand: Optional[str] = None
     __brand_selector: Optional[str] = None
     __card_data: Optional[PlainCardData] = None
     __card_entry_mode: Optional[str] = None
-    __card_on_file_data: Optional[CardOnFileData] = None
     __cardholder_verification_method: Optional[str] = None
-    __ecommerce_data: Optional[ECommerceDataForAccountVerification] = None
-    __network_token_data: Optional[NetworkTokenData] = None
+    __ecommerce_data: Optional[ECommerceData] = None
     __point_of_sale_data: Optional[PointOfSaleData] = None
     __wallet_id: Optional[str] = None
 
@@ -79,17 +75,6 @@ class CardPaymentDataForVerification(DataObject):
         self.__card_entry_mode = value
 
     @property
-    def card_on_file_data(self) -> Optional[CardOnFileData]:
-        """
-        Type: :class:`worldline.acquiring.sdk.v1.domain.card_on_file_data.CardOnFileData`
-        """
-        return self.__card_on_file_data
-
-    @card_on_file_data.setter
-    def card_on_file_data(self, value: Optional[CardOnFileData]) -> None:
-        self.__card_on_file_data = value
-
-    @property
     def cardholder_verification_method(self) -> Optional[str]:
         """
         | Cardholder verification method used in the transaction
@@ -103,28 +88,17 @@ class CardPaymentDataForVerification(DataObject):
         self.__cardholder_verification_method = value
 
     @property
-    def ecommerce_data(self) -> Optional[ECommerceDataForAccountVerification]:
+    def ecommerce_data(self) -> Optional[ECommerceData]:
         """
         | Request data for eCommerce transactions
 
-        Type: :class:`worldline.acquiring.sdk.v1.domain.e_commerce_data_for_account_verification.ECommerceDataForAccountVerification`
+        Type: :class:`worldline.acquiring.sdk.v1.domain.e_commerce_data.ECommerceData`
         """
         return self.__ecommerce_data
 
     @ecommerce_data.setter
-    def ecommerce_data(self, value: Optional[ECommerceDataForAccountVerification]) -> None:
+    def ecommerce_data(self, value: Optional[ECommerceData]) -> None:
         self.__ecommerce_data = value
-
-    @property
-    def network_token_data(self) -> Optional[NetworkTokenData]:
-        """
-        Type: :class:`worldline.acquiring.sdk.v1.domain.network_token_data.NetworkTokenData`
-        """
-        return self.__network_token_data
-
-    @network_token_data.setter
-    def network_token_data(self, value: Optional[NetworkTokenData]) -> None:
-        self.__network_token_data = value
 
     @property
     def point_of_sale_data(self) -> Optional[PointOfSaleData]:
@@ -153,7 +127,7 @@ class CardPaymentDataForVerification(DataObject):
         self.__wallet_id = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CardPaymentDataForVerification, self).to_dictionary()
+        dictionary = super(CardPaymentDataForBalanceInquiry, self).to_dictionary()
         if self.brand is not None:
             dictionary['brand'] = self.brand
         if self.brand_selector is not None:
@@ -162,22 +136,18 @@ class CardPaymentDataForVerification(DataObject):
             dictionary['cardData'] = self.card_data.to_dictionary()
         if self.card_entry_mode is not None:
             dictionary['cardEntryMode'] = self.card_entry_mode
-        if self.card_on_file_data is not None:
-            dictionary['cardOnFileData'] = self.card_on_file_data.to_dictionary()
         if self.cardholder_verification_method is not None:
             dictionary['cardholderVerificationMethod'] = self.cardholder_verification_method
         if self.ecommerce_data is not None:
             dictionary['ecommerceData'] = self.ecommerce_data.to_dictionary()
-        if self.network_token_data is not None:
-            dictionary['networkTokenData'] = self.network_token_data.to_dictionary()
         if self.point_of_sale_data is not None:
             dictionary['pointOfSaleData'] = self.point_of_sale_data.to_dictionary()
         if self.wallet_id is not None:
             dictionary['walletId'] = self.wallet_id
         return dictionary
 
-    def from_dictionary(self, dictionary: dict) -> 'CardPaymentDataForVerification':
-        super(CardPaymentDataForVerification, self).from_dictionary(dictionary)
+    def from_dictionary(self, dictionary: dict) -> 'CardPaymentDataForBalanceInquiry':
+        super(CardPaymentDataForBalanceInquiry, self).from_dictionary(dictionary)
         if 'brand' in dictionary:
             self.brand = dictionary['brand']
         if 'brandSelector' in dictionary:
@@ -189,23 +159,13 @@ class CardPaymentDataForVerification(DataObject):
             self.card_data = value.from_dictionary(dictionary['cardData'])
         if 'cardEntryMode' in dictionary:
             self.card_entry_mode = dictionary['cardEntryMode']
-        if 'cardOnFileData' in dictionary:
-            if not isinstance(dictionary['cardOnFileData'], dict):
-                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['cardOnFileData']))
-            value = CardOnFileData()
-            self.card_on_file_data = value.from_dictionary(dictionary['cardOnFileData'])
         if 'cardholderVerificationMethod' in dictionary:
             self.cardholder_verification_method = dictionary['cardholderVerificationMethod']
         if 'ecommerceData' in dictionary:
             if not isinstance(dictionary['ecommerceData'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['ecommerceData']))
-            value = ECommerceDataForAccountVerification()
+            value = ECommerceData()
             self.ecommerce_data = value.from_dictionary(dictionary['ecommerceData'])
-        if 'networkTokenData' in dictionary:
-            if not isinstance(dictionary['networkTokenData'], dict):
-                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['networkTokenData']))
-            value = NetworkTokenData()
-            self.network_token_data = value.from_dictionary(dictionary['networkTokenData'])
         if 'pointOfSaleData' in dictionary:
             if not isinstance(dictionary['pointOfSaleData'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['pointOfSaleData']))

@@ -3,11 +3,12 @@
 # This file was automatically generated.
 #
 from datetime import datetime
-from typing import Optional
+from typing import List, Optional
 
 from .amount_data import AmountData
 from .api_references_for_responses import ApiReferencesForResponses
 from .card_payment_data_for_resource import CardPaymentDataForResource
+from .emv_data_item import EmvDataItem
 
 from worldline.acquiring.sdk.domain.data_object import DataObject
 
@@ -16,6 +17,7 @@ class ApiRefundResponse(DataObject):
 
     __authorization_code: Optional[str] = None
     __card_payment_data: Optional[CardPaymentDataForResource] = None
+    __emv_data: Optional[List[EmvDataItem]] = None
     __operation_id: Optional[str] = None
     __referenced_payment_id: Optional[str] = None
     __references: Optional[ApiReferencesForResponses] = None
@@ -52,6 +54,19 @@ class ApiRefundResponse(DataObject):
     @card_payment_data.setter
     def card_payment_data(self, value: Optional[CardPaymentDataForResource]) -> None:
         self.__card_payment_data = value
+
+    @property
+    def emv_data(self) -> Optional[List[EmvDataItem]]:
+        """
+        | EMV data of the card as tag/value pairs. It is needed when cardEntryMode is CHIP or CONTACTLESS.
+
+        Type: list[:class:`worldline.acquiring.sdk.v1.domain.emv_data_item.EmvDataItem`]
+        """
+        return self.__emv_data
+
+    @emv_data.setter
+    def emv_data(self, value: Optional[List[EmvDataItem]]) -> None:
+        self.__emv_data = value
 
     @property
     def operation_id(self) -> Optional[str]:
@@ -110,7 +125,12 @@ class ApiRefundResponse(DataObject):
     @property
     def responder(self) -> Optional[str]:
         """
-        | The party that originated the response
+        | The party that originated the response Possible values are:
+        
+        * WORLDLINE
+        * ISSUER
+        * SCHEME
+        * PARTNER
 
         Type: str
         """
@@ -137,6 +157,11 @@ class ApiRefundResponse(DataObject):
     def response_code_category(self) -> Optional[str]:
         """
         | Category of response code.
+        | Possible values are:
+        
+        * APPROVED
+        * PARTIALLY_APPROVED
+        * DECLINED
 
         Type: str
         """
@@ -179,6 +204,15 @@ class ApiRefundResponse(DataObject):
     def status(self) -> Optional[str]:
         """
         | The status of the payment, refund or credit transfer
+        | Possible values are:
+        
+        * AUTHORIZED
+        * NOT_AUTHORIZED
+        * PENDING
+        * PENDING_CAPTURE
+        * CONFIRMED
+        * REVERSED
+        * CANCELLED
 
         Type: str
         """
@@ -220,6 +254,11 @@ class ApiRefundResponse(DataObject):
             dictionary['authorizationCode'] = self.authorization_code
         if self.card_payment_data is not None:
             dictionary['cardPaymentData'] = self.card_payment_data.to_dictionary()
+        if self.emv_data is not None:
+            dictionary['emvData'] = []
+            for element in self.emv_data:
+                if element is not None:
+                    dictionary['emvData'].append(element.to_dictionary())
         if self.operation_id is not None:
             dictionary['operationId'] = self.operation_id
         if self.referenced_payment_id is not None:
@@ -255,6 +294,13 @@ class ApiRefundResponse(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['cardPaymentData']))
             value = CardPaymentDataForResource()
             self.card_payment_data = value.from_dictionary(dictionary['cardPaymentData'])
+        if 'emvData' in dictionary:
+            if not isinstance(dictionary['emvData'], list):
+                raise TypeError('value \'{}\' is not a list'.format(dictionary['emvData']))
+            self.emv_data = []
+            for element in dictionary['emvData']:
+                value = EmvDataItem()
+                self.emv_data.append(value.from_dictionary(element))
         if 'operationId' in dictionary:
             self.operation_id = dictionary['operationId']
         if 'referencedPaymentId' in dictionary:

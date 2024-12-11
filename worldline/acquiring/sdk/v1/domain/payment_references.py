@@ -11,7 +11,6 @@ class PaymentReferences(DataObject):
 
     __dynamic_descriptor: Optional[str] = None
     __merchant_reference: Optional[str] = None
-    __retrieval_reference_number: Optional[str] = None
 
     @property
     def dynamic_descriptor(self) -> Optional[str]:
@@ -41,27 +40,12 @@ class PaymentReferences(DataObject):
     def merchant_reference(self, value: Optional[str]) -> None:
         self.__merchant_reference = value
 
-    @property
-    def retrieval_reference_number(self) -> Optional[str]:
-        """
-        | Retrieval reference number for transaction, must be AN(12) if provided
-
-        Type: str
-        """
-        return self.__retrieval_reference_number
-
-    @retrieval_reference_number.setter
-    def retrieval_reference_number(self, value: Optional[str]) -> None:
-        self.__retrieval_reference_number = value
-
     def to_dictionary(self) -> dict:
         dictionary = super(PaymentReferences, self).to_dictionary()
         if self.dynamic_descriptor is not None:
             dictionary['dynamicDescriptor'] = self.dynamic_descriptor
         if self.merchant_reference is not None:
             dictionary['merchantReference'] = self.merchant_reference
-        if self.retrieval_reference_number is not None:
-            dictionary['retrievalReferenceNumber'] = self.retrieval_reference_number
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentReferences':
@@ -70,6 +54,4 @@ class PaymentReferences(DataObject):
             self.dynamic_descriptor = dictionary['dynamicDescriptor']
         if 'merchantReference' in dictionary:
             self.merchant_reference = dictionary['merchantReference']
-        if 'retrievalReferenceNumber' in dictionary:
-            self.retrieval_reference_number = dictionary['retrievalReferenceNumber']
         return self

@@ -7,6 +7,7 @@ from typing import Optional
 
 from .amount_data import AmountData
 from .dcc_data import DccData
+from .terminal_data import TerminalData
 
 from worldline.acquiring.sdk.domain.data_object import DataObject
 
@@ -16,6 +17,7 @@ class ApiIncrementRequest(DataObject):
     __dynamic_currency_conversion: Optional[DccData] = None
     __increment_amount: Optional[AmountData] = None
     __operation_id: Optional[str] = None
+    __terminal_data: Optional[TerminalData] = None
     __transaction_timestamp: Optional[datetime] = None
 
     @property
@@ -61,6 +63,17 @@ class ApiIncrementRequest(DataObject):
         self.__operation_id = value
 
     @property
+    def terminal_data(self) -> Optional[TerminalData]:
+        """
+        Type: :class:`worldline.acquiring.sdk.v1.domain.terminal_data.TerminalData`
+        """
+        return self.__terminal_data
+
+    @terminal_data.setter
+    def terminal_data(self, value: Optional[TerminalData]) -> None:
+        self.__terminal_data = value
+
+    @property
     def transaction_timestamp(self) -> Optional[datetime]:
         """
         | Timestamp of transaction in ISO 8601 format (YYYY-MM-DDThh:mm:ss+TZD)
@@ -82,6 +95,8 @@ class ApiIncrementRequest(DataObject):
             dictionary['incrementAmount'] = self.increment_amount.to_dictionary()
         if self.operation_id is not None:
             dictionary['operationId'] = self.operation_id
+        if self.terminal_data is not None:
+            dictionary['terminalData'] = self.terminal_data.to_dictionary()
         if self.transaction_timestamp is not None:
             dictionary['transactionTimestamp'] = DataObject.format_datetime(self.transaction_timestamp)
         return dictionary
@@ -100,6 +115,11 @@ class ApiIncrementRequest(DataObject):
             self.increment_amount = value.from_dictionary(dictionary['incrementAmount'])
         if 'operationId' in dictionary:
             self.operation_id = dictionary['operationId']
+        if 'terminalData' in dictionary:
+            if not isinstance(dictionary['terminalData'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['terminalData']))
+            value = TerminalData()
+            self.terminal_data = value.from_dictionary(dictionary['terminalData'])
         if 'transactionTimestamp' in dictionary:
             self.transaction_timestamp = DataObject.parse_datetime(dictionary['transactionTimestamp'])
         return self

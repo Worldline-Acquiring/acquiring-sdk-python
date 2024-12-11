@@ -15,7 +15,7 @@ class PointOfSaleDataForDcc(DataObject):
     @property
     def terminal_country_code(self) -> Optional[str]:
         """
-        | Country code of the terminal
+        | ISO 3166 Country code of the terminal
 
         Type: str
         """

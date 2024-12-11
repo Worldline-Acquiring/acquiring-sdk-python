@@ -66,7 +66,8 @@ class SubOperation(DataObject):
     @property
     def operation_timestamp(self) -> Optional[datetime]:
         """
-        | Timestamp of the operation in merchant time zone in format yyyy-MM-ddTHH:mm:ssZ
+        | Timestamp of the operation in ISO 8601 format (YYYY-MM-DDThh:mm:ss+TZD)
+        | It can be expressed in merchant time zone (ex: 2023-10-10T08:00+02:00) or in UTC (ex: 2023-10-10T08:00Z) yyyy-MM-ddTHH:mm:ssZ
 
         Type: datetime
         """
@@ -79,7 +80,14 @@ class SubOperation(DataObject):
     @property
     def operation_type(self) -> Optional[str]:
         """
-        | The kind of operation
+        | The kind of operation.
+        | Possible values are:
+        
+        * AUTHORIZATION
+        * CAPTURE
+        * REFUND
+        * INCREMENT
+        * AUTHORIZATION_REVERSAL
 
         Type: str
         """
@@ -106,6 +114,11 @@ class SubOperation(DataObject):
     def response_code_category(self) -> Optional[str]:
         """
         | Category of response code.
+        | Possible values are:
+        
+        * APPROVED
+        * PARTIALLY_APPROVED
+        * DECLINED
 
         Type: str
         """

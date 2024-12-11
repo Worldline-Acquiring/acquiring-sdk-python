@@ -5,63 +5,48 @@
 from datetime import datetime
 from typing import Optional
 
-from .amount_data import AmountData
-from .dcc_data import DccData
+from .card_payment_data_for_balance_inquiry import CardPaymentDataForBalanceInquiry
+from .merchant_data import MerchantData
 from .payment_references import PaymentReferences
 from .terminal_data import TerminalData
 
 from worldline.acquiring.sdk.domain.data_object import DataObject
 
 
-class ApiPaymentRefundRequest(DataObject):
+class ApiBalanceInquiryRequest(DataObject):
 
-    __amount: Optional[AmountData] = None
-    __capture_immediately: Optional[bool] = None
-    __dynamic_currency_conversion: Optional[DccData] = None
+    __card_payment_data: Optional[CardPaymentDataForBalanceInquiry] = None
+    __merchant: Optional[MerchantData] = None
     __operation_id: Optional[str] = None
     __references: Optional[PaymentReferences] = None
     __terminal_data: Optional[TerminalData] = None
     __transaction_timestamp: Optional[datetime] = None
 
     @property
-    def amount(self) -> Optional[AmountData]:
+    def card_payment_data(self) -> Optional[CardPaymentDataForBalanceInquiry]:
         """
-        | Amount to refund. If not provided, the full amount will be refunded.
+        | Card data
 
-        Type: :class:`worldline.acquiring.sdk.v1.domain.amount_data.AmountData`
+        Type: :class:`worldline.acquiring.sdk.v1.domain.card_payment_data_for_balance_inquiry.CardPaymentDataForBalanceInquiry`
         """
-        return self.__amount
+        return self.__card_payment_data
 
-    @amount.setter
-    def amount(self, value: Optional[AmountData]) -> None:
-        self.__amount = value
+    @card_payment_data.setter
+    def card_payment_data(self, value: Optional[CardPaymentDataForBalanceInquiry]) -> None:
+        self.__card_payment_data = value
 
     @property
-    def capture_immediately(self) -> Optional[bool]:
+    def merchant(self) -> Optional[MerchantData]:
         """
-        | If true the transaction will be authorized and captured immediately
+        | Merchant Data
 
-        Type: bool
+        Type: :class:`worldline.acquiring.sdk.v1.domain.merchant_data.MerchantData`
         """
-        return self.__capture_immediately
+        return self.__merchant
 
-    @capture_immediately.setter
-    def capture_immediately(self, value: Optional[bool]) -> None:
-        self.__capture_immediately = value
-
-    @property
-    def dynamic_currency_conversion(self) -> Optional[DccData]:
-        """
-        | Dynamic Currency Conversion (DCC) rate data from DCC lookup response.
-        | Mandatory for DCC transactions.
-
-        Type: :class:`worldline.acquiring.sdk.v1.domain.dcc_data.DccData`
-        """
-        return self.__dynamic_currency_conversion
-
-    @dynamic_currency_conversion.setter
-    def dynamic_currency_conversion(self, value: Optional[DccData]) -> None:
-        self.__dynamic_currency_conversion = value
+    @merchant.setter
+    def merchant(self, value: Optional[MerchantData]) -> None:
+        self.__merchant = value
 
     @property
     def operation_id(self) -> Optional[str]:
@@ -117,13 +102,11 @@ class ApiPaymentRefundRequest(DataObject):
         self.__transaction_timestamp = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(ApiPaymentRefundRequest, self).to_dictionary()
-        if self.amount is not None:
-            dictionary['amount'] = self.amount.to_dictionary()
-        if self.capture_immediately is not None:
-            dictionary['captureImmediately'] = self.capture_immediately
-        if self.dynamic_currency_conversion is not None:
-            dictionary['dynamicCurrencyConversion'] = self.dynamic_currency_conversion.to_dictionary()
+        dictionary = super(ApiBalanceInquiryRequest, self).to_dictionary()
+        if self.card_payment_data is not None:
+            dictionary['cardPaymentData'] = self.card_payment_data.to_dictionary()
+        if self.merchant is not None:
+            dictionary['merchant'] = self.merchant.to_dictionary()
         if self.operation_id is not None:
             dictionary['operationId'] = self.operation_id
         if self.references is not None:
@@ -134,20 +117,18 @@ class ApiPaymentRefundRequest(DataObject):
             dictionary['transactionTimestamp'] = DataObject.format_datetime(self.transaction_timestamp)
         return dictionary
 
-    def from_dictionary(self, dictionary: dict) -> 'ApiPaymentRefundRequest':
-        super(ApiPaymentRefundRequest, self).from_dictionary(dictionary)
-        if 'amount' in dictionary:
-            if not isinstance(dictionary['amount'], dict):
-                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['amount']))
-            value = AmountData()
-            self.amount = value.from_dictionary(dictionary['amount'])
-        if 'captureImmediately' in dictionary:
-            self.capture_immediately = dictionary['captureImmediately']
-        if 'dynamicCurrencyConversion' in dictionary:
-            if not isinstance(dictionary['dynamicCurrencyConversion'], dict):
-                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['dynamicCurrencyConversion']))
-            value = DccData()
-            self.dynamic_currency_conversion = value.from_dictionary(dictionary['dynamicCurrencyConversion'])
+    def from_dictionary(self, dictionary: dict) -> 'ApiBalanceInquiryRequest':
+        super(ApiBalanceInquiryRequest, self).from_dictionary(dictionary)
+        if 'cardPaymentData' in dictionary:
+            if not isinstance(dictionary['cardPaymentData'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['cardPaymentData']))
+            value = CardPaymentDataForBalanceInquiry()
+            self.card_payment_data = value.from_dictionary(dictionary['cardPaymentData'])
+        if 'merchant' in dictionary:
+            if not isinstance(dictionary['merchant'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['merchant']))
+            value = MerchantData()
+            self.merchant = value.from_dictionary(dictionary['merchant'])
         if 'operationId' in dictionary:
             self.operation_id = dictionary['operationId']
         if 'references' in dictionary:

@@ -30,7 +30,7 @@ class CardOnFileData(DataObject):
     @property
     def is_initial_transaction(self) -> Optional[bool]:
         """
-        | Indicate wether this is the initial Card on File transaction or not
+        | Indicate whether this is the initial Card on File transaction or not
 
         Type: bool
         """

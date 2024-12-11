@@ -3,11 +3,12 @@
 # This file was automatically generated.
 #
 from datetime import datetime
-from typing import Optional
+from typing import List, Optional
 
 from .amount_data import AmountData
 from .api_references_for_responses import ApiReferencesForResponses
 from .card_payment_data_for_response import CardPaymentDataForResponse
+from .emv_data_item import EmvDataItem
 
 from worldline.acquiring.sdk.domain.data_object import DataObject
 
@@ -15,6 +16,7 @@ from worldline.acquiring.sdk.domain.data_object import DataObject
 class ApiPaymentResponse(DataObject):
 
     __card_payment_data: Optional[CardPaymentDataForResponse] = None
+    __emv_data: Optional[List[EmvDataItem]] = None
     __initial_authorization_code: Optional[str] = None
     __operation_id: Optional[str] = None
     __payment_id: Optional[str] = None
@@ -38,6 +40,19 @@ class ApiPaymentResponse(DataObject):
     @card_payment_data.setter
     def card_payment_data(self, value: Optional[CardPaymentDataForResponse]) -> None:
         self.__card_payment_data = value
+
+    @property
+    def emv_data(self) -> Optional[List[EmvDataItem]]:
+        """
+        | EMV data of the card as tag/value pairs.
+
+        Type: list[:class:`worldline.acquiring.sdk.v1.domain.emv_data_item.EmvDataItem`]
+        """
+        return self.__emv_data
+
+    @emv_data.setter
+    def emv_data(self, value: Optional[List[EmvDataItem]]) -> None:
+        self.__emv_data = value
 
     @property
     def initial_authorization_code(self) -> Optional[str]:
@@ -96,7 +111,12 @@ class ApiPaymentResponse(DataObject):
     @property
     def responder(self) -> Optional[str]:
         """
-        | The party that originated the response
+        | The party that originated the response Possible values are:
+        
+        * WORLDLINE
+        * ISSUER
+        * SCHEME
+        * PARTNER
 
         Type: str
         """
@@ -123,6 +143,11 @@ class ApiPaymentResponse(DataObject):
     def response_code_category(self) -> Optional[str]:
         """
         | Category of response code.
+        | Possible values are:
+        
+        * APPROVED
+        * PARTIALLY_APPROVED
+        * DECLINED
 
         Type: str
         """
@@ -165,6 +190,15 @@ class ApiPaymentResponse(DataObject):
     def status(self) -> Optional[str]:
         """
         | The status of the payment, refund or credit transfer
+        | Possible values are:
+        
+        * AUTHORIZED
+        * NOT_AUTHORIZED
+        * PENDING
+        * PENDING_CAPTURE
+        * CONFIRMED
+        * REVERSED
+        * CANCELLED
 
         Type: str
         """
@@ -204,6 +238,11 @@ class ApiPaymentResponse(DataObject):
         dictionary = super(ApiPaymentResponse, self).to_dictionary()
         if self.card_payment_data is not None:
             dictionary['cardPaymentData'] = self.card_payment_data.to_dictionary()
+        if self.emv_data is not None:
+            dictionary['emvData'] = []
+            for element in self.emv_data:
+                if element is not None:
+                    dictionary['emvData'].append(element.to_dictionary())
         if self.initial_authorization_code is not None:
             dictionary['initialAuthorizationCode'] = self.initial_authorization_code
         if self.operation_id is not None:
@@ -237,6 +276,13 @@ class ApiPaymentResponse(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['cardPaymentData']))
             value = CardPaymentDataForResponse()
             self.card_payment_data = value.from_dictionary(dictionary['cardPaymentData'])
+        if 'emvData' in dictionary:
+            if not isinstance(dictionary['emvData'], list):
+                raise TypeError('value \'{}\' is not a list'.format(dictionary['emvData']))
+            self.emv_data = []
+            for element in dictionary['emvData']:
+                value = EmvDataItem()
+                self.emv_data.append(value.from_dictionary(element))
         if 'initialAuthorizationCode' in dictionary:
             self.initial_authorization_code = dictionary['initialAuthorizationCode']
         if 'operationId' in dictionary:

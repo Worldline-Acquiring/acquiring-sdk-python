@@ -7,6 +7,8 @@ from typing import Optional
 
 from .amount_data import AmountData
 from .dcc_data import DccData
+from .payment_references import PaymentReferences
+from .terminal_data import TerminalData
 
 from worldline.acquiring.sdk.domain.data_object import DataObject
 
@@ -18,6 +20,8 @@ class ApiCaptureRequest(DataObject):
     __dynamic_currency_conversion: Optional[DccData] = None
     __is_final: Optional[bool] = None
     __operation_id: Optional[str] = None
+    __references: Optional[PaymentReferences] = None
+    __terminal_data: Optional[TerminalData] = None
     __transaction_timestamp: Optional[datetime] = None
 
     @property
@@ -90,6 +94,30 @@ class ApiCaptureRequest(DataObject):
         self.__operation_id = value
 
     @property
+    def references(self) -> Optional[PaymentReferences]:
+        """
+        | Payment References
+
+        Type: :class:`worldline.acquiring.sdk.v1.domain.payment_references.PaymentReferences`
+        """
+        return self.__references
+
+    @references.setter
+    def references(self, value: Optional[PaymentReferences]) -> None:
+        self.__references = value
+
+    @property
+    def terminal_data(self) -> Optional[TerminalData]:
+        """
+        Type: :class:`worldline.acquiring.sdk.v1.domain.terminal_data.TerminalData`
+        """
+        return self.__terminal_data
+
+    @terminal_data.setter
+    def terminal_data(self, value: Optional[TerminalData]) -> None:
+        self.__terminal_data = value
+
+    @property
     def transaction_timestamp(self) -> Optional[datetime]:
         """
         | Timestamp of transaction in ISO 8601 format (YYYY-MM-DDThh:mm:ss+TZD)
@@ -115,6 +143,10 @@ class ApiCaptureRequest(DataObject):
             dictionary['isFinal'] = self.is_final
         if self.operation_id is not None:
             dictionary['operationId'] = self.operation_id
+        if self.references is not None:
+            dictionary['references'] = self.references.to_dictionary()
+        if self.terminal_data is not None:
+            dictionary['terminalData'] = self.terminal_data.to_dictionary()
         if self.transaction_timestamp is not None:
             dictionary['transactionTimestamp'] = DataObject.format_datetime(self.transaction_timestamp)
         return dictionary
@@ -137,6 +169,16 @@ class ApiCaptureRequest(DataObject):
             self.is_final = dictionary['isFinal']
         if 'operationId' in dictionary:
             self.operation_id = dictionary['operationId']
+        if 'references' in dictionary:
+            if not isinstance(dictionary['references'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['references']))
+            value = PaymentReferences()
+            self.references = value.from_dictionary(dictionary['references'])
+        if 'terminalData' in dictionary:
+            if not isinstance(dictionary['terminalData'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['terminalData']))
+            value = TerminalData()
+            self.terminal_data = value.from_dictionary(dictionary['terminalData'])
         if 'transactionTimestamp' in dictionary:
             self.transaction_timestamp = DataObject.parse_datetime(dictionary['transactionTimestamp'])
         return self

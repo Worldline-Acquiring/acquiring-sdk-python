@@ -106,6 +106,15 @@ class ApiPaymentResource(DataObject):
     def status(self) -> Optional[str]:
         """
         | The status of the payment, refund or credit transfer
+        | Possible values are:
+        
+        * AUTHORIZED
+        * NOT_AUTHORIZED
+        * PENDING
+        * PENDING_CAPTURE
+        * CONFIRMED
+        * REVERSED
+        * CANCELLED
 
         Type: str
         """

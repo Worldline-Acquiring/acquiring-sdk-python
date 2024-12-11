@@ -16,7 +16,7 @@ class AmountData(DataObject):
     @property
     def amount(self) -> Optional[int]:
         """
-        | Amount of transaction formatted according to card scheme specifications. E.g. 100 for 1.00 EUR. Either this or amount must be present.
+        | Amount of transaction formatted according to card scheme specifications. E.g. 100 for 1.00 EUR.
 
         Type: int
         """

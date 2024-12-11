@@ -12,6 +12,7 @@ class CardDataForDcc(DataObject):
     __bin: Optional[str] = None
     __brand: Optional[str] = None
     __card_country_code: Optional[str] = None
+    __card_entry_mode: Optional[str] = None
 
     @property
     def bin(self) -> Optional[str]:
@@ -42,7 +43,7 @@ class CardDataForDcc(DataObject):
     @property
     def card_country_code(self) -> Optional[str]:
         """
-        | The country code of the card
+        | The ISO 3166 country code of the card
 
         Type: str
         """
@@ -52,6 +53,19 @@ class CardDataForDcc(DataObject):
     def card_country_code(self, value: Optional[str]) -> None:
         self.__card_country_code = value
 
+    @property
+    def card_entry_mode(self) -> Optional[str]:
+        """
+        | Card entry mode used in the transaction
+
+        Type: str
+        """
+        return self.__card_entry_mode
+
+    @card_entry_mode.setter
+    def card_entry_mode(self, value: Optional[str]) -> None:
+        self.__card_entry_mode = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(CardDataForDcc, self).to_dictionary()
         if self.bin is not None:
@@ -60,6 +74,8 @@ class CardDataForDcc(DataObject):
             dictionary['brand'] = self.brand
         if self.card_country_code is not None:
             dictionary['cardCountryCode'] = self.card_country_code
+        if self.card_entry_mode is not None:
+            dictionary['cardEntryMode'] = self.card_entry_mode
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CardDataForDcc':
@@ -70,4 +86,6 @@ class CardDataForDcc(DataObject):
             self.brand = dictionary['brand']
         if 'cardCountryCode' in dictionary:
             self.card_country_code = dictionary['cardCountryCode']
+        if 'cardEntryMode' in dictionary:
+            self.card_entry_mode = dictionary['cardEntryMode']
         return self

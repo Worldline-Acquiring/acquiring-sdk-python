@@ -5,7 +5,7 @@
 from typing import Optional
 
 from .e_commerce_data_for_response import ECommerceDataForResponse
-from .point_of_sale_data import PointOfSaleData
+from .point_of_sale_data_for_response import PointOfSaleDataForResponse
 
 from worldline.acquiring.sdk.domain.data_object import DataObject
 
@@ -14,7 +14,7 @@ class CardPaymentDataForResponse(DataObject):
 
     __brand: Optional[str] = None
     __ecommerce_data: Optional[ECommerceDataForResponse] = None
-    __point_of_sale_data: Optional[PointOfSaleData] = None
+    __point_of_sale_data: Optional[PointOfSaleDataForResponse] = None
 
     @property
     def brand(self) -> Optional[str]:
@@ -41,16 +41,14 @@ class CardPaymentDataForResponse(DataObject):
         self.__ecommerce_data = value
 
     @property
-    def point_of_sale_data(self) -> Optional[PointOfSaleData]:
+    def point_of_sale_data(self) -> Optional[PointOfSaleDataForResponse]:
         """
-        | Payment terminal request data
-
-        Type: :class:`worldline.acquiring.sdk.v1.domain.point_of_sale_data.PointOfSaleData`
+        Type: :class:`worldline.acquiring.sdk.v1.domain.point_of_sale_data_for_response.PointOfSaleDataForResponse`
         """
         return self.__point_of_sale_data
 
     @point_of_sale_data.setter
-    def point_of_sale_data(self, value: Optional[PointOfSaleData]) -> None:
+    def point_of_sale_data(self, value: Optional[PointOfSaleDataForResponse]) -> None:
         self.__point_of_sale_data = value
 
     def to_dictionary(self) -> dict:
@@ -75,6 +73,6 @@ class CardPaymentDataForResponse(DataObject):
         if 'pointOfSaleData' in dictionary:
             if not isinstance(dictionary['pointOfSaleData'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['pointOfSaleData']))
-            value = PointOfSaleData()
+            value = PointOfSaleDataForResponse()
             self.point_of_sale_data = value.from_dictionary(dictionary['pointOfSaleData'])
         return self

@@ -16,6 +16,16 @@ class ECommerceDataForResponse(DataObject):
     def address_verification_result(self) -> Optional[str]:
         """
         | Result of Address Verification Result
+        | Possible values:
+        
+        * MATCH
+        * ADDRESS_MATCH_POSTAL_CODE_MISMATCH
+        * ADDRESS_MISMATCH_POSTAL_CODE_MATCH
+        * ADDRESS_MATCH_POSTAL_CODE_NOT_VERIFIED
+        * ADDRESS_NOT_VERIFIED_POSTAL_CODE_MATCH
+        * MISMATCH
+        * ERROR
+        * NOT_VERIFIED
 
         Type: str
         """
@@ -29,6 +39,13 @@ class ECommerceDataForResponse(DataObject):
     def card_security_code_result(self) -> Optional[str]:
         """
         | Result of card security code check
+        | Possible values:
+        
+        * MATCH
+        * MISMATCH
+        * NOT_VERIFIED
+        * OMITTED
+        * MISSING
 
         Type: str
         """

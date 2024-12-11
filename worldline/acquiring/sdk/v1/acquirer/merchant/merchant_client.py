@@ -6,6 +6,7 @@ from typing import Mapping, Optional
 
 from worldline.acquiring.sdk.api_resource import ApiResource
 from worldline.acquiring.sdk.v1.acquirer.merchant.accountverifications.account_verifications_client import AccountVerificationsClient
+from worldline.acquiring.sdk.v1.acquirer.merchant.balanceinquiries.balance_inquiries_client import BalanceInquiriesClient
 from worldline.acquiring.sdk.v1.acquirer.merchant.dynamiccurrencyconversion.dynamic_currency_conversion_client import DynamicCurrencyConversionClient
 from worldline.acquiring.sdk.v1.acquirer.merchant.payments.payments_client import PaymentsClient
 from worldline.acquiring.sdk.v1.acquirer.merchant.refunds.refunds_client import RefundsClient
@@ -47,6 +48,14 @@ class MerchantClient(ApiResource):
         :return: :class:`worldline.acquiring.sdk.v1.acquirer.merchant.accountverifications.account_verifications_client.AccountVerificationsClient`
         """
         return AccountVerificationsClient(self, None)
+
+    def balance_inquiries(self) -> BalanceInquiriesClient:
+        """
+        Resource /processing/v1/{acquirerId}/{merchantId}/balance-inquiries
+
+        :return: :class:`worldline.acquiring.sdk.v1.acquirer.merchant.balanceinquiries.balance_inquiries_client.BalanceInquiriesClient`
+        """
+        return BalanceInquiriesClient(self, None)
 
     def technical_reversals(self) -> TechnicalReversalsClient:
         """

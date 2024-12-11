@@ -17,6 +17,7 @@ class CardPaymentData(DataObject):
 
     __allow_partial_approval: Optional[bool] = None
     __brand: Optional[str] = None
+    __brand_selector: Optional[str] = None
     __capture_immediately: Optional[bool] = None
     __card_data: Optional[PlainCardData] = None
     __card_entry_mode: Optional[str] = None
@@ -30,7 +31,7 @@ class CardPaymentData(DataObject):
     @property
     def allow_partial_approval(self) -> Optional[bool]:
         """
-        | Indicate wether you allow partial approval or not
+        | Indicate whether you allow partial approval or not
 
         Type: bool
         """
@@ -52,6 +53,19 @@ class CardPaymentData(DataObject):
     @brand.setter
     def brand(self, value: Optional[str]) -> None:
         self.__brand = value
+
+    @property
+    def brand_selector(self) -> Optional[str]:
+        """
+        | The party responsible for the brand selection.
+
+        Type: str
+        """
+        return self.__brand_selector
+
+    @brand_selector.setter
+    def brand_selector(self, value: Optional[str]) -> None:
+        self.__brand_selector = value
 
     @property
     def capture_immediately(self) -> Optional[bool]:
@@ -82,7 +96,7 @@ class CardPaymentData(DataObject):
     @property
     def card_entry_mode(self) -> Optional[str]:
         """
-        | Card entry mode used in the transaction, defaults to ECOMMERCE
+        | Card entry mode used in the transaction
 
         Type: str
         """
@@ -119,7 +133,7 @@ class CardPaymentData(DataObject):
     @property
     def ecommerce_data(self) -> Optional[ECommerceData]:
         """
-        | Request data for eCommerce and MOTO transactions
+        | Request data for eCommerce transactions
 
         Type: :class:`worldline.acquiring.sdk.v1.domain.e_commerce_data.ECommerceData`
         """
@@ -143,7 +157,7 @@ class CardPaymentData(DataObject):
     @property
     def point_of_sale_data(self) -> Optional[PointOfSaleData]:
         """
-        | Payment terminal request data
+        | Request data for Point Of Sale (POS) or "in person" Transaction
 
         Type: :class:`worldline.acquiring.sdk.v1.domain.point_of_sale_data.PointOfSaleData`
         """
@@ -172,6 +186,8 @@ class CardPaymentData(DataObject):
             dictionary['allowPartialApproval'] = self.allow_partial_approval
         if self.brand is not None:
             dictionary['brand'] = self.brand
+        if self.brand_selector is not None:
+            dictionary['brandSelector'] = self.brand_selector
         if self.capture_immediately is not None:
             dictionary['captureImmediately'] = self.capture_immediately
         if self.card_data is not None:
@@ -198,6 +214,8 @@ class CardPaymentData(DataObject):
             self.allow_partial_approval = dictionary['allowPartialApproval']
         if 'brand' in dictionary:
             self.brand = dictionary['brand']
+        if 'brandSelector' in dictionary:
+            self.brand_selector = dictionary['brandSelector']
         if 'captureImmediately' in dictionary:
             self.capture_immediately = dictionary['captureImmediately']
         if 'cardData' in dictionary:

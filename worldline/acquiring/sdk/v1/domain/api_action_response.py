@@ -49,7 +49,12 @@ class ApiActionResponse(DataObject):
     @property
     def responder(self) -> Optional[str]:
         """
-        | The party that originated the response
+        | The party that originated the response Possible values are:
+        
+        * WORLDLINE
+        * ISSUER
+        * SCHEME
+        * PARTNER
 
         Type: str
         """
@@ -76,6 +81,11 @@ class ApiActionResponse(DataObject):
     def response_code_category(self) -> Optional[str]:
         """
         | Category of response code.
+        | Possible values are:
+        
+        * APPROVED
+        * PARTIALLY_APPROVED
+        * DECLINED
 
         Type: str
         """

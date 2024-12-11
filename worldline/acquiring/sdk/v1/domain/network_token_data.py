@@ -29,7 +29,7 @@ class NetworkTokenData(DataObject):
     def eci(self) -> Optional[str]:
         """
         | Electronic Commerce Indicator
-        | Value returned by the 3D Secure process that indicates the level of authentication.
+        | Value that indicates the level of authentication.
         | Contains different values depending on the brand.
 
         Type: str

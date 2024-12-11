@@ -29,7 +29,7 @@ class SubsequentCardOnFileData(DataObject):
     @property
     def initial_scheme_transaction_id(self) -> Optional[str]:
         """
-        | Scheme transaction ID of initial transaction
+        | ID assigned by the scheme to identify a transaction through its whole lifecycle.
 
         Type: str
         """

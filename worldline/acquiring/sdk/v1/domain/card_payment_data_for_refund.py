@@ -6,7 +6,6 @@ from typing import Optional
 
 from .network_token_data import NetworkTokenData
 from .plain_card_data import PlainCardData
-from .point_of_sale_data import PointOfSaleData
 
 from worldline.acquiring.sdk.domain.data_object import DataObject
 
@@ -14,11 +13,12 @@ from worldline.acquiring.sdk.domain.data_object import DataObject
 class CardPaymentDataForRefund(DataObject):
 
     __brand: Optional[str] = None
+    __brand_selector: Optional[str] = None
     __capture_immediately: Optional[bool] = None
     __card_data: Optional[PlainCardData] = None
     __card_entry_mode: Optional[str] = None
+    __cardholder_verification_method: Optional[str] = None
     __network_token_data: Optional[NetworkTokenData] = None
-    __point_of_sale_data: Optional[PointOfSaleData] = None
     __wallet_id: Optional[str] = None
 
     @property
@@ -33,6 +33,19 @@ class CardPaymentDataForRefund(DataObject):
     @brand.setter
     def brand(self, value: Optional[str]) -> None:
         self.__brand = value
+
+    @property
+    def brand_selector(self) -> Optional[str]:
+        """
+        | The party responsible for the brand selection.
+
+        Type: str
+        """
+        return self.__brand_selector
+
+    @brand_selector.setter
+    def brand_selector(self, value: Optional[str]) -> None:
+        self.__brand_selector = value
 
     @property
     def capture_immediately(self) -> Optional[bool]:
@@ -63,7 +76,7 @@ class CardPaymentDataForRefund(DataObject):
     @property
     def card_entry_mode(self) -> Optional[str]:
         """
-        | Card entry mode used in the transaction, defaults to ECOMMERCE
+        | Card entry mode used in the transaction
 
         Type: str
         """
@@ -72,6 +85,19 @@ class CardPaymentDataForRefund(DataObject):
     @card_entry_mode.setter
     def card_entry_mode(self, value: Optional[str]) -> None:
         self.__card_entry_mode = value
+
+    @property
+    def cardholder_verification_method(self) -> Optional[str]:
+        """
+        | Cardholder verification method used in the transaction
+
+        Type: str
+        """
+        return self.__cardholder_verification_method
+
+    @cardholder_verification_method.setter
+    def cardholder_verification_method(self, value: Optional[str]) -> None:
+        self.__cardholder_verification_method = value
 
     @property
     def network_token_data(self) -> Optional[NetworkTokenData]:
@@ -83,19 +109,6 @@ class CardPaymentDataForRefund(DataObject):
     @network_token_data.setter
     def network_token_data(self, value: Optional[NetworkTokenData]) -> None:
         self.__network_token_data = value
-
-    @property
-    def point_of_sale_data(self) -> Optional[PointOfSaleData]:
-        """
-        | Payment terminal request data
-
-        Type: :class:`worldline.acquiring.sdk.v1.domain.point_of_sale_data.PointOfSaleData`
-        """
-        return self.__point_of_sale_data
-
-    @point_of_sale_data.setter
-    def point_of_sale_data(self, value: Optional[PointOfSaleData]) -> None:
-        self.__point_of_sale_data = value
 
     @property
     def wallet_id(self) -> Optional[str]:
@@ -114,16 +127,18 @@ class CardPaymentDataForRefund(DataObject):
         dictionary = super(CardPaymentDataForRefund, self).to_dictionary()
         if self.brand is not None:
             dictionary['brand'] = self.brand
+        if self.brand_selector is not None:
+            dictionary['brandSelector'] = self.brand_selector
         if self.capture_immediately is not None:
             dictionary['captureImmediately'] = self.capture_immediately
         if self.card_data is not None:
             dictionary['cardData'] = self.card_data.to_dictionary()
         if self.card_entry_mode is not None:
             dictionary['cardEntryMode'] = self.card_entry_mode
+        if self.cardholder_verification_method is not None:
+            dictionary['cardholderVerificationMethod'] = self.cardholder_verification_method
         if self.network_token_data is not None:
             dictionary['networkTokenData'] = self.network_token_data.to_dictionary()
-        if self.point_of_sale_data is not None:
-            dictionary['pointOfSaleData'] = self.point_of_sale_data.to_dictionary()
         if self.wallet_id is not None:
             dictionary['walletId'] = self.wallet_id
         return dictionary
@@ -132,6 +147,8 @@ class CardPaymentDataForRefund(DataObject):
         super(CardPaymentDataForRefund, self).from_dictionary(dictionary)
         if 'brand' in dictionary:
             self.brand = dictionary['brand']
+        if 'brandSelector' in dictionary:
+            self.brand_selector = dictionary['brandSelector']
         if 'captureImmediately' in dictionary:
             self.capture_immediately = dictionary['captureImmediately']
         if 'cardData' in dictionary:
@@ -141,16 +158,13 @@ class CardPaymentDataForRefund(DataObject):
             self.card_data = value.from_dictionary(dictionary['cardData'])
         if 'cardEntryMode' in dictionary:
             self.card_entry_mode = dictionary['cardEntryMode']
+        if 'cardholderVerificationMethod' in dictionary:
+            self.cardholder_verification_method = dictionary['cardholderVerificationMethod']
         if 'networkTokenData' in dictionary:
             if not isinstance(dictionary['networkTokenData'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['networkTokenData']))
             value = NetworkTokenData()
             self.network_token_data = value.from_dictionary(dictionary['networkTokenData'])
-        if 'pointOfSaleData' in dictionary:
-            if not isinstance(dictionary['pointOfSaleData'], dict):
-                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['pointOfSaleData']))
-            value = PointOfSaleData()
-            self.point_of_sale_data = value.from_dictionary(dictionary['pointOfSaleData'])
         if 'walletId' in dictionary:
             self.wallet_id = dictionary['walletId']
         return self

@@ -366,6 +366,13 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: worldline.acquiring.sdk.v1.acquirer.merchant.balanceinquiries.balance_inquiries_client
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: worldline.acquiring.sdk.v1.acquirer.merchant.dynamiccurrencyconversion.dynamic_currency_conversion_client
     :members:
     :show-inheritance:
@@ -444,6 +451,20 @@ API Reference
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: worldline.acquiring.sdk.v1.domain.api_action_response_for_refund
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.api_balance_inquiry_request
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.api_balance_inquiry_response
     :members:
     :show-inheritance:
     :undoc-members:
@@ -604,6 +625,13 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: worldline.acquiring.sdk.v1.domain.card_payment_data_for_balance_inquiry
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: worldline.acquiring.sdk.v1.domain.card_payment_data_for_refund
     :members:
     :show-inheritance:
@@ -661,6 +689,13 @@ API Reference
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: worldline.acquiring.sdk.v1.domain.e_commerce_data_for_response
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.emv_data_item
     :members:
     :show-inheritance:
     :undoc-members:
@@ -730,6 +765,13 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: worldline.acquiring.sdk.v1.domain.point_of_sale_data_for_response
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: worldline.acquiring.sdk.v1.domain.rate_data
     :members:
     :show-inheritance:
@@ -752,6 +794,13 @@ API Reference
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: worldline.acquiring.sdk.v1.domain.subsequent_card_on_file_data
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.terminal_data
     :members:
     :show-inheritance:
     :undoc-members:
