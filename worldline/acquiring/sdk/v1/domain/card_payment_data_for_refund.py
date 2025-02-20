@@ -6,6 +6,7 @@ from typing import Optional
 
 from .network_token_data import NetworkTokenData
 from .plain_card_data import PlainCardData
+from .point_of_sale_data import PointOfSaleData
 
 from worldline.acquiring.sdk.domain.data_object import DataObject
 
@@ -19,6 +20,7 @@ class CardPaymentDataForRefund(DataObject):
     __card_entry_mode: Optional[str] = None
     __cardholder_verification_method: Optional[str] = None
     __network_token_data: Optional[NetworkTokenData] = None
+    __point_of_sale_data: Optional[PointOfSaleData] = None
     __wallet_id: Optional[str] = None
 
     @property
@@ -111,6 +113,19 @@ class CardPaymentDataForRefund(DataObject):
         self.__network_token_data = value
 
     @property
+    def point_of_sale_data(self) -> Optional[PointOfSaleData]:
+        """
+        | Request data for Point Of Sale (POS) or "in person" Transaction
+
+        Type: :class:`worldline.acquiring.sdk.v1.domain.point_of_sale_data.PointOfSaleData`
+        """
+        return self.__point_of_sale_data
+
+    @point_of_sale_data.setter
+    def point_of_sale_data(self, value: Optional[PointOfSaleData]) -> None:
+        self.__point_of_sale_data = value
+
+    @property
     def wallet_id(self) -> Optional[str]:
         """
         | Type of wallet, values are assigned by card schemes, e.g. 101 for MasterPass in eCommerce, 102 for MasterPass NFC, 103 for Apple Pay, 216 for Google Pay and 217 for Samsung Pay
@@ -139,6 +154,8 @@ class CardPaymentDataForRefund(DataObject):
             dictionary['cardholderVerificationMethod'] = self.cardholder_verification_method
         if self.network_token_data is not None:
             dictionary['networkTokenData'] = self.network_token_data.to_dictionary()
+        if self.point_of_sale_data is not None:
+            dictionary['pointOfSaleData'] = self.point_of_sale_data.to_dictionary()
         if self.wallet_id is not None:
             dictionary['walletId'] = self.wallet_id
         return dictionary
@@ -165,6 +182,11 @@ class CardPaymentDataForRefund(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['networkTokenData']))
             value = NetworkTokenData()
             self.network_token_data = value.from_dictionary(dictionary['networkTokenData'])
+        if 'pointOfSaleData' in dictionary:
+            if not isinstance(dictionary['pointOfSaleData'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['pointOfSaleData']))
+            value = PointOfSaleData()
+            self.point_of_sale_data = value.from_dictionary(dictionary['pointOfSaleData'])
         if 'walletId' in dictionary:
             self.wallet_id = dictionary['walletId']
         return self

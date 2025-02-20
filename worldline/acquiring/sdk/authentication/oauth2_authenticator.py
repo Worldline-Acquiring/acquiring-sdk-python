@@ -50,7 +50,7 @@ class OAuth2Authenticator(Authenticator):
         # The empty path will ensure that all paths will match, as each full path ends with an empty string.
         self.__access_tokens = [
             self.__TokenType("", "processing_payment", "processing_refund", "processing_credittransfer",
-                             "processing_accountverification",
+                             "processing_accountverification", "processing_balanceinquiry",
                              "processing_operation_reverse", "processing_dcc_rate", "services_ping"),
         ]
 

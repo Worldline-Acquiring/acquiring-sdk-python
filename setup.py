@@ -21,7 +21,7 @@ def test_collector():
 
 setup(
     name="acquiring-sdk-python",
-    version="1.0.0",
+    version="1.1.0",
     author="Worldline Acquiring",
     author_email="github.acquiring@worldline.com",
     description="SDK to communicate with the Worldline Acquiring platform using the Worldline Acquiring API",
@@ -53,6 +53,7 @@ setup(
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
         "Topic :: Office/Business :: Financial",
         "License :: OSI Approved :: MIT License"
     ],

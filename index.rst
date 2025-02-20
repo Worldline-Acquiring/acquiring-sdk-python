@@ -576,6 +576,13 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: worldline.acquiring.sdk.v1.domain.api_refund_reversal_request
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: worldline.acquiring.sdk.v1.domain.api_refund_summary_for_response
     :members:
     :show-inheritance:

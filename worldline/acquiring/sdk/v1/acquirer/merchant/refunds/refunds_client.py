@@ -12,10 +12,10 @@ from worldline.acquiring.sdk.communication.response_exception import ResponseExc
 from worldline.acquiring.sdk.v1.domain.api_action_response_for_refund import ApiActionResponseForRefund
 from worldline.acquiring.sdk.v1.domain.api_capture_request_for_refund import ApiCaptureRequestForRefund
 from worldline.acquiring.sdk.v1.domain.api_payment_error_response import ApiPaymentErrorResponse
-from worldline.acquiring.sdk.v1.domain.api_payment_reversal_request import ApiPaymentReversalRequest
 from worldline.acquiring.sdk.v1.domain.api_refund_request import ApiRefundRequest
 from worldline.acquiring.sdk.v1.domain.api_refund_resource import ApiRefundResource
 from worldline.acquiring.sdk.v1.domain.api_refund_response import ApiRefundResponse
+from worldline.acquiring.sdk.v1.domain.api_refund_reversal_request import ApiRefundReversalRequest
 from worldline.acquiring.sdk.v1.exception_factory import create_exception
 
 
@@ -137,14 +137,14 @@ class RefundsClient(ApiResource):
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
             raise create_exception(e.status_code, e.body, error_object, context)
 
-    def reverse_refund_authorization(self, refund_id: str, body: ApiPaymentReversalRequest, context: Optional[CallContext] = None) -> ApiActionResponseForRefund:
+    def reverse_refund_authorization(self, refund_id: str, body: ApiRefundReversalRequest, context: Optional[CallContext] = None) -> ApiActionResponseForRefund:
         """
         Resource /processing/v1/{acquirerId}/{merchantId}/refunds/{refundId}/authorization-reversals - Reverse refund authorization
 
         See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Refunds/operation/reverseRefundAuthorization
 
         :param refund_id:  str
-        :param body:       :class:`worldline.acquiring.sdk.v1.domain.api_payment_reversal_request.ApiPaymentReversalRequest`
+        :param body:       :class:`worldline.acquiring.sdk.v1.domain.api_refund_reversal_request.ApiRefundReversalRequest`
         :param context:    :class:`worldline.acquiring.sdk.call_context.CallContext`
         :return: :class:`worldline.acquiring.sdk.v1.domain.api_action_response_for_refund.ApiActionResponseForRefund`
         :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)

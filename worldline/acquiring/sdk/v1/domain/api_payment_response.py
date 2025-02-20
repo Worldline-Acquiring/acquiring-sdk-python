@@ -129,7 +129,7 @@ class ApiPaymentResponse(DataObject):
     @property
     def response_code(self) -> Optional[str]:
         """
-        | Numeric response code, e.g. 0000, 0005
+        | Numeric response code, e.g. 0, 5
 
         Type: str
         """
