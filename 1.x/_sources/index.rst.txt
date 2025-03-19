@@ -415,6 +415,13 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: worldline.acquiring.sdk.v1.domain.additional_response_data
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: worldline.acquiring.sdk.v1.domain.address_verification_data
     :members:
     :show-inheritance:
@@ -709,6 +716,13 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: worldline.acquiring.sdk.v1.domain.geo_coordinates
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: worldline.acquiring.sdk.v1.domain.get_dcc_rate_request
     :members:
     :show-inheritance:
@@ -780,6 +794,20 @@ API Reference
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: worldline.acquiring.sdk.v1.domain.rate_data
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.service_location_address
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.service_location_data
     :members:
     :show-inheritance:
     :undoc-members:
