@@ -20,7 +20,6 @@ class ApiPaymentResource(DataObject):
     __operations: Optional[List[SubOperation]] = None
     __payment_id: Optional[str] = None
     __references: Optional[ApiReferencesForResponses] = None
-    __retry_after: Optional[str] = None
     __status: Optional[str] = None
     __status_timestamp: Optional[datetime] = None
     __total_authorized_amount: Optional[AmountData] = None
@@ -87,22 +86,6 @@ class ApiPaymentResource(DataObject):
         self.__references = value
 
     @property
-    def retry_after(self) -> Optional[str]:
-        """
-        | The duration to wait after the initial submission before retrying the payment.
-        | Expressed using ISO 8601 duration format, ex: PT2H for 2 hours.
-        | This field is only present when the payment can be retried later.
-        | PT0 means that the payment can be retried immediately.
-
-        Type: str
-        """
-        return self.__retry_after
-
-    @retry_after.setter
-    def retry_after(self, value: Optional[str]) -> None:
-        self.__retry_after = value
-
-    @property
     def status(self) -> Optional[str]:
         """
         | The status of the payment, refund or credit transfer
@@ -165,8 +148,6 @@ class ApiPaymentResource(DataObject):
             dictionary['paymentId'] = self.payment_id
         if self.references is not None:
             dictionary['references'] = self.references.to_dictionary()
-        if self.retry_after is not None:
-            dictionary['retryAfter'] = self.retry_after
         if self.status is not None:
             dictionary['status'] = self.status
         if self.status_timestamp is not None:
@@ -198,8 +179,6 @@ class ApiPaymentResource(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['references']))
             value = ApiReferencesForResponses()
             self.references = value.from_dictionary(dictionary['references'])
-        if 'retryAfter' in dictionary:
-            self.retry_after = dictionary['retryAfter']
         if 'status' in dictionary:
             self.status = dictionary['status']
         if 'statusTimestamp' in dictionary:

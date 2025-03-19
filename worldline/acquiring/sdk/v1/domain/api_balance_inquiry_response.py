@@ -4,22 +4,39 @@
 #
 from typing import Optional
 
+from .additional_response_data import AdditionalResponseData
 from .amount_data import AmountData
 from .api_references_for_responses import ApiReferencesForResponses
+from .card_payment_data_for_response import CardPaymentDataForResponse
 
 from worldline.acquiring.sdk.domain.data_object import DataObject
 
 
 class ApiBalanceInquiryResponse(DataObject):
 
+    __additional_response_data: Optional[AdditionalResponseData] = None
     __authorization_code: Optional[str] = None
     __available_amount: Optional[AmountData] = None
+    __card_payment_data: Optional[CardPaymentDataForResponse] = None
     __operation_id: Optional[str] = None
     __references: Optional[ApiReferencesForResponses] = None
     __responder: Optional[str] = None
     __response_code: Optional[str] = None
     __response_code_category: Optional[str] = None
     __response_code_description: Optional[str] = None
+
+    @property
+    def additional_response_data(self) -> Optional[AdditionalResponseData]:
+        """
+        | Additional response data
+
+        Type: :class:`worldline.acquiring.sdk.v1.domain.additional_response_data.AdditionalResponseData`
+        """
+        return self.__additional_response_data
+
+    @additional_response_data.setter
+    def additional_response_data(self, value: Optional[AdditionalResponseData]) -> None:
+        self.__additional_response_data = value
 
     @property
     def authorization_code(self) -> Optional[str]:
@@ -46,6 +63,17 @@ class ApiBalanceInquiryResponse(DataObject):
     @available_amount.setter
     def available_amount(self, value: Optional[AmountData]) -> None:
         self.__available_amount = value
+
+    @property
+    def card_payment_data(self) -> Optional[CardPaymentDataForResponse]:
+        """
+        Type: :class:`worldline.acquiring.sdk.v1.domain.card_payment_data_for_response.CardPaymentDataForResponse`
+        """
+        return self.__card_payment_data
+
+    @card_payment_data.setter
+    def card_payment_data(self, value: Optional[CardPaymentDataForResponse]) -> None:
+        self.__card_payment_data = value
 
     @property
     def operation_id(self) -> Optional[str]:
@@ -139,10 +167,14 @@ class ApiBalanceInquiryResponse(DataObject):
 
     def to_dictionary(self) -> dict:
         dictionary = super(ApiBalanceInquiryResponse, self).to_dictionary()
+        if self.additional_response_data is not None:
+            dictionary['additionalResponseData'] = self.additional_response_data.to_dictionary()
         if self.authorization_code is not None:
             dictionary['authorizationCode'] = self.authorization_code
         if self.available_amount is not None:
             dictionary['availableAmount'] = self.available_amount.to_dictionary()
+        if self.card_payment_data is not None:
+            dictionary['cardPaymentData'] = self.card_payment_data.to_dictionary()
         if self.operation_id is not None:
             dictionary['operationId'] = self.operation_id
         if self.references is not None:
@@ -159,6 +191,11 @@ class ApiBalanceInquiryResponse(DataObject):
 
     def from_dictionary(self, dictionary: dict) -> 'ApiBalanceInquiryResponse':
         super(ApiBalanceInquiryResponse, self).from_dictionary(dictionary)
+        if 'additionalResponseData' in dictionary:
+            if not isinstance(dictionary['additionalResponseData'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['additionalResponseData']))
+            value = AdditionalResponseData()
+            self.additional_response_data = value.from_dictionary(dictionary['additionalResponseData'])
         if 'authorizationCode' in dictionary:
             self.authorization_code = dictionary['authorizationCode']
         if 'availableAmount' in dictionary:
@@ -166,6 +203,11 @@ class ApiBalanceInquiryResponse(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['availableAmount']))
             value = AmountData()
             self.available_amount = value.from_dictionary(dictionary['availableAmount'])
+        if 'cardPaymentData' in dictionary:
+            if not isinstance(dictionary['cardPaymentData'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['cardPaymentData']))
+            value = CardPaymentDataForResponse()
+            self.card_payment_data = value.from_dictionary(dictionary['cardPaymentData'])
         if 'operationId' in dictionary:
             self.operation_id = dictionary['operationId']
         if 'references' in dictionary:

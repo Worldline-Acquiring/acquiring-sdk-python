@@ -4,6 +4,7 @@
 #
 from typing import Optional
 
+from .additional_response_data import AdditionalResponseData
 from .api_refund_summary_for_response import ApiRefundSummaryForResponse
 
 from worldline.acquiring.sdk.domain.data_object import DataObject
@@ -11,12 +12,26 @@ from worldline.acquiring.sdk.domain.data_object import DataObject
 
 class ApiActionResponseForRefund(DataObject):
 
+    __additional_response_data: Optional[AdditionalResponseData] = None
     __operation_id: Optional[str] = None
     __refund: Optional[ApiRefundSummaryForResponse] = None
     __responder: Optional[str] = None
     __response_code: Optional[str] = None
     __response_code_category: Optional[str] = None
     __response_code_description: Optional[str] = None
+
+    @property
+    def additional_response_data(self) -> Optional[AdditionalResponseData]:
+        """
+        | Additional response data
+
+        Type: :class:`worldline.acquiring.sdk.v1.domain.additional_response_data.AdditionalResponseData`
+        """
+        return self.__additional_response_data
+
+    @additional_response_data.setter
+    def additional_response_data(self, value: Optional[AdditionalResponseData]) -> None:
+        self.__additional_response_data = value
 
     @property
     def operation_id(self) -> Optional[str]:
@@ -110,6 +125,8 @@ class ApiActionResponseForRefund(DataObject):
 
     def to_dictionary(self) -> dict:
         dictionary = super(ApiActionResponseForRefund, self).to_dictionary()
+        if self.additional_response_data is not None:
+            dictionary['additionalResponseData'] = self.additional_response_data.to_dictionary()
         if self.operation_id is not None:
             dictionary['operationId'] = self.operation_id
         if self.refund is not None:
@@ -126,6 +143,11 @@ class ApiActionResponseForRefund(DataObject):
 
     def from_dictionary(self, dictionary: dict) -> 'ApiActionResponseForRefund':
         super(ApiActionResponseForRefund, self).from_dictionary(dictionary)
+        if 'additionalResponseData' in dictionary:
+            if not isinstance(dictionary['additionalResponseData'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['additionalResponseData']))
+            value = AdditionalResponseData()
+            self.additional_response_data = value.from_dictionary(dictionary['additionalResponseData'])
         if 'operationId' in dictionary:
             self.operation_id = dictionary['operationId']
         if 'refund' in dictionary:

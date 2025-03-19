@@ -21,7 +21,6 @@ class ApiRefundResource(DataObject):
     __referenced_payment_id: Optional[str] = None
     __references: Optional[ApiReferencesForResponses] = None
     __refund_id: Optional[str] = None
-    __retry_after: Optional[str] = None
     __status: Optional[str] = None
     __status_timestamp: Optional[datetime] = None
     __total_authorized_amount: Optional[AmountData] = None
@@ -101,22 +100,6 @@ class ApiRefundResource(DataObject):
         self.__refund_id = value
 
     @property
-    def retry_after(self) -> Optional[str]:
-        """
-        | The duration to wait after the initial submission before retrying the payment.
-        | Expressed using ISO 8601 duration format, ex: PT2H for 2 hours.
-        | This field is only present when the payment can be retried later.
-        | PT0 means that the payment can be retried immediately.
-
-        Type: str
-        """
-        return self.__retry_after
-
-    @retry_after.setter
-    def retry_after(self, value: Optional[str]) -> None:
-        self.__retry_after = value
-
-    @property
     def status(self) -> Optional[str]:
         """
         | The status of the payment, refund or credit transfer
@@ -181,8 +164,6 @@ class ApiRefundResource(DataObject):
             dictionary['references'] = self.references.to_dictionary()
         if self.refund_id is not None:
             dictionary['refundId'] = self.refund_id
-        if self.retry_after is not None:
-            dictionary['retryAfter'] = self.retry_after
         if self.status is not None:
             dictionary['status'] = self.status
         if self.status_timestamp is not None:
@@ -216,8 +197,6 @@ class ApiRefundResource(DataObject):
             self.references = value.from_dictionary(dictionary['references'])
         if 'refundId' in dictionary:
             self.refund_id = dictionary['refundId']
-        if 'retryAfter' in dictionary:
-            self.retry_after = dictionary['retryAfter']
         if 'status' in dictionary:
             self.status = dictionary['status']
         if 'statusTimestamp' in dictionary:

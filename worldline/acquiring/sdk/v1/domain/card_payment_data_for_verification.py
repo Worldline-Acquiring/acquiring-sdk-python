@@ -81,6 +81,8 @@ class CardPaymentDataForVerification(DataObject):
     @property
     def card_on_file_data(self) -> Optional[CardOnFileData]:
         """
+        | Card data can be kept on file to support various use cases. It requires you to flag the transaction correctly.
+
         Type: :class:`worldline.acquiring.sdk.v1.domain.card_on_file_data.CardOnFileData`
         """
         return self.__card_on_file_data
@@ -142,7 +144,14 @@ class CardPaymentDataForVerification(DataObject):
     @property
     def wallet_id(self) -> Optional[str]:
         """
-        | Type of wallet, values are assigned by card schemes, e.g. 101 for MasterPass in eCommerce, 102 for MasterPass NFC, 103 for Apple Pay, 216 for Google Pay and 217 for Samsung Pay
+        | Type of wallet, values are assigned by card schemes, e.g.
+        
+        * 101 for MasterPass in eCommerce
+        * 102 for MasterPass NFC
+        * 103 for Apple Pay
+        * 216 for Google Pay
+        * 217 for Samsung Pay
+        * 327 to indicate the usage of Network tokens in the transaction
 
         Type: str
         """

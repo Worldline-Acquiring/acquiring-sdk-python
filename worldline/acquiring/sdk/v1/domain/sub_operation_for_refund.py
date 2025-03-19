@@ -19,7 +19,6 @@ class SubOperationForRefund(DataObject):
     __response_code: Optional[str] = None
     __response_code_category: Optional[str] = None
     __response_code_description: Optional[str] = None
-    __retry_after: Optional[str] = None
 
     @property
     def amount(self) -> Optional[AmountData]:
@@ -125,22 +124,6 @@ class SubOperationForRefund(DataObject):
     def response_code_description(self, value: Optional[str]) -> None:
         self.__response_code_description = value
 
-    @property
-    def retry_after(self) -> Optional[str]:
-        """
-        | The duration to wait after the initial submission before retrying the operation.
-        | Expressed using ISO 8601 duration format, ex: PT2H for 2 hours.
-        | This field is only present when the operation can be retried later.
-        | PT0 means that the operation can be retried immediately.
-
-        Type: str
-        """
-        return self.__retry_after
-
-    @retry_after.setter
-    def retry_after(self, value: Optional[str]) -> None:
-        self.__retry_after = value
-
     def to_dictionary(self) -> dict:
         dictionary = super(SubOperationForRefund, self).to_dictionary()
         if self.amount is not None:
@@ -157,8 +140,6 @@ class SubOperationForRefund(DataObject):
             dictionary['responseCodeCategory'] = self.response_code_category
         if self.response_code_description is not None:
             dictionary['responseCodeDescription'] = self.response_code_description
-        if self.retry_after is not None:
-            dictionary['retryAfter'] = self.retry_after
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'SubOperationForRefund':
@@ -180,6 +161,4 @@ class SubOperationForRefund(DataObject):
             self.response_code_category = dictionary['responseCodeCategory']
         if 'responseCodeDescription' in dictionary:
             self.response_code_description = dictionary['responseCodeDescription']
-        if 'retryAfter' in dictionary:
-            self.retry_after = dictionary['retryAfter']
         return self

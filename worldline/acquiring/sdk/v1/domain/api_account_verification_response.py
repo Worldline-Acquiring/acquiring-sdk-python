@@ -4,6 +4,7 @@
 #
 from typing import Optional
 
+from .additional_response_data import AdditionalResponseData
 from .api_references_for_responses import ApiReferencesForResponses
 from .card_payment_data_for_response import CardPaymentDataForResponse
 
@@ -12,6 +13,7 @@ from worldline.acquiring.sdk.domain.data_object import DataObject
 
 class ApiAccountVerificationResponse(DataObject):
 
+    __additional_response_data: Optional[AdditionalResponseData] = None
     __authorization_code: Optional[str] = None
     __card_payment_data: Optional[CardPaymentDataForResponse] = None
     __operation_id: Optional[str] = None
@@ -20,6 +22,19 @@ class ApiAccountVerificationResponse(DataObject):
     __response_code: Optional[str] = None
     __response_code_category: Optional[str] = None
     __response_code_description: Optional[str] = None
+
+    @property
+    def additional_response_data(self) -> Optional[AdditionalResponseData]:
+        """
+        | Additional response data
+
+        Type: :class:`worldline.acquiring.sdk.v1.domain.additional_response_data.AdditionalResponseData`
+        """
+        return self.__additional_response_data
+
+    @additional_response_data.setter
+    def additional_response_data(self, value: Optional[AdditionalResponseData]) -> None:
+        self.__additional_response_data = value
 
     @property
     def authorization_code(self) -> Optional[str]:
@@ -137,6 +152,8 @@ class ApiAccountVerificationResponse(DataObject):
 
     def to_dictionary(self) -> dict:
         dictionary = super(ApiAccountVerificationResponse, self).to_dictionary()
+        if self.additional_response_data is not None:
+            dictionary['additionalResponseData'] = self.additional_response_data.to_dictionary()
         if self.authorization_code is not None:
             dictionary['authorizationCode'] = self.authorization_code
         if self.card_payment_data is not None:
@@ -157,6 +174,11 @@ class ApiAccountVerificationResponse(DataObject):
 
     def from_dictionary(self, dictionary: dict) -> 'ApiAccountVerificationResponse':
         super(ApiAccountVerificationResponse, self).from_dictionary(dictionary)
+        if 'additionalResponseData' in dictionary:
+            if not isinstance(dictionary['additionalResponseData'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['additionalResponseData']))
+            value = AdditionalResponseData()
+            self.additional_response_data = value.from_dictionary(dictionary['additionalResponseData'])
         if 'authorizationCode' in dictionary:
             self.authorization_code = dictionary['authorizationCode']
         if 'cardPaymentData' in dictionary:

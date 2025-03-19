@@ -19,6 +19,8 @@ class CardOnFileData(DataObject):
     @property
     def initial_card_on_file_data(self) -> Optional[InitialCardOnFileData]:
         """
+        | When card data is stored you need to flag its purpose using ``transactionType`` and the intended ``futureUse`` of the card data.
+
         Type: :class:`worldline.acquiring.sdk.v1.domain.initial_card_on_file_data.InitialCardOnFileData`
         """
         return self.__initial_card_on_file_data
@@ -43,6 +45,8 @@ class CardOnFileData(DataObject):
     @property
     def subsequent_card_on_file_data(self) -> Optional[SubsequentCardOnFileData]:
         """
+        | When you are using stored card you need to again specify the ``transactionType``. All values are supported when the MERCHANT is the initiator of the transaction. When the CARDHOLDER is the initiator of the transaction, only ``UNSCHEDULED_CARD_ON_FILE`` is supported. For all cases when the MERCHANT is the initiator of the transaction, the ``initialSchemeTransactionId`` property is mandatory.
+
         Type: :class:`worldline.acquiring.sdk.v1.domain.subsequent_card_on_file_data.SubsequentCardOnFileData`
         """
         return self.__subsequent_card_on_file_data

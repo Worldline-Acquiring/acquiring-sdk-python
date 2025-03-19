@@ -11,6 +11,7 @@ class PlainCardData(DataObject):
 
     __card_number: Optional[str] = None
     __card_security_code: Optional[str] = None
+    __card_sequence_number: Optional[int] = None
     __expiry_date: Optional[str] = None
 
     @property
@@ -42,6 +43,22 @@ class PlainCardData(DataObject):
         self.__card_security_code = value
 
     @property
+    def card_sequence_number(self) -> Optional[int]:
+        """
+        | Card sequence number extracted from track2
+        
+        * usually known only for on-us cards, as the position of the sequence number is issuer specific
+        * for requests without track2 the card sequence number is usually stored in the EMV tag ``5F34``
+
+        Type: int
+        """
+        return self.__card_sequence_number
+
+    @card_sequence_number.setter
+    def card_sequence_number(self, value: Optional[int]) -> None:
+        self.__card_sequence_number = value
+
+    @property
     def expiry_date(self) -> Optional[str]:
         """
         | Card or token expiry date in format MMYYYY
@@ -60,6 +77,8 @@ class PlainCardData(DataObject):
             dictionary['cardNumber'] = self.card_number
         if self.card_security_code is not None:
             dictionary['cardSecurityCode'] = self.card_security_code
+        if self.card_sequence_number is not None:
+            dictionary['cardSequenceNumber'] = self.card_sequence_number
         if self.expiry_date is not None:
             dictionary['expiryDate'] = self.expiry_date
         return dictionary
@@ -70,6 +89,8 @@ class PlainCardData(DataObject):
             self.card_number = dictionary['cardNumber']
         if 'cardSecurityCode' in dictionary:
             self.card_security_code = dictionary['cardSecurityCode']
+        if 'cardSequenceNumber' in dictionary:
+            self.card_sequence_number = dictionary['cardSequenceNumber']
         if 'expiryDate' in dictionary:
             self.expiry_date = dictionary['expiryDate']
         return self

@@ -9,6 +9,7 @@ from .e_commerce_data import ECommerceData
 from .network_token_data import NetworkTokenData
 from .plain_card_data import PlainCardData
 from .point_of_sale_data import PointOfSaleData
+from .service_location_data import ServiceLocationData
 
 from worldline.acquiring.sdk.domain.data_object import DataObject
 
@@ -26,6 +27,7 @@ class CardPaymentData(DataObject):
     __ecommerce_data: Optional[ECommerceData] = None
     __network_token_data: Optional[NetworkTokenData] = None
     __point_of_sale_data: Optional[PointOfSaleData] = None
+    __service_location_data: Optional[ServiceLocationData] = None
     __wallet_id: Optional[str] = None
 
     @property
@@ -109,6 +111,8 @@ class CardPaymentData(DataObject):
     @property
     def card_on_file_data(self) -> Optional[CardOnFileData]:
         """
+        | Card data can be kept on file to support various use cases. It requires you to flag the transaction correctly.
+
         Type: :class:`worldline.acquiring.sdk.v1.domain.card_on_file_data.CardOnFileData`
         """
         return self.__card_on_file_data
@@ -168,9 +172,29 @@ class CardPaymentData(DataObject):
         self.__point_of_sale_data = value
 
     @property
+    def service_location_data(self) -> Optional[ServiceLocationData]:
+        """
+        | Request data object to describe the location where the cardholder received the service. Note: You should either provide the address or the geo coordinates.
+
+        Type: :class:`worldline.acquiring.sdk.v1.domain.service_location_data.ServiceLocationData`
+        """
+        return self.__service_location_data
+
+    @service_location_data.setter
+    def service_location_data(self, value: Optional[ServiceLocationData]) -> None:
+        self.__service_location_data = value
+
+    @property
     def wallet_id(self) -> Optional[str]:
         """
-        | Type of wallet, values are assigned by card schemes, e.g. 101 for MasterPass in eCommerce, 102 for MasterPass NFC, 103 for Apple Pay, 216 for Google Pay and 217 for Samsung Pay
+        | Type of wallet, values are assigned by card schemes, e.g.
+        
+        * 101 for MasterPass in eCommerce
+        * 102 for MasterPass NFC
+        * 103 for Apple Pay
+        * 216 for Google Pay
+        * 217 for Samsung Pay
+        * 327 to indicate the usage of Network tokens in the transaction
 
         Type: str
         """
@@ -204,6 +228,8 @@ class CardPaymentData(DataObject):
             dictionary['networkTokenData'] = self.network_token_data.to_dictionary()
         if self.point_of_sale_data is not None:
             dictionary['pointOfSaleData'] = self.point_of_sale_data.to_dictionary()
+        if self.service_location_data is not None:
+            dictionary['serviceLocationData'] = self.service_location_data.to_dictionary()
         if self.wallet_id is not None:
             dictionary['walletId'] = self.wallet_id
         return dictionary
@@ -247,6 +273,11 @@ class CardPaymentData(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['pointOfSaleData']))
             value = PointOfSaleData()
             self.point_of_sale_data = value.from_dictionary(dictionary['pointOfSaleData'])
+        if 'serviceLocationData' in dictionary:
+            if not isinstance(dictionary['serviceLocationData'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['serviceLocationData']))
+            value = ServiceLocationData()
+            self.service_location_data = value.from_dictionary(dictionary['serviceLocationData'])
         if 'walletId' in dictionary:
             self.wallet_id = dictionary['walletId']
         return self

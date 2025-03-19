@@ -3,20 +3,20 @@
 # This file was automatically generated.
 #
 from datetime import datetime
-from typing import List, Optional
+from typing import Optional
 
+from .additional_response_data import AdditionalResponseData
 from .amount_data import AmountData
 from .api_references_for_responses import ApiReferencesForResponses
 from .card_payment_data_for_response import CardPaymentDataForResponse
-from .emv_data_item import EmvDataItem
 
 from worldline.acquiring.sdk.domain.data_object import DataObject
 
 
 class ApiPaymentResponse(DataObject):
 
+    __additional_response_data: Optional[AdditionalResponseData] = None
     __card_payment_data: Optional[CardPaymentDataForResponse] = None
-    __emv_data: Optional[List[EmvDataItem]] = None
     __initial_authorization_code: Optional[str] = None
     __operation_id: Optional[str] = None
     __payment_id: Optional[str] = None
@@ -25,10 +25,22 @@ class ApiPaymentResponse(DataObject):
     __response_code: Optional[str] = None
     __response_code_category: Optional[str] = None
     __response_code_description: Optional[str] = None
-    __retry_after: Optional[str] = None
     __status: Optional[str] = None
     __status_timestamp: Optional[datetime] = None
     __total_authorized_amount: Optional[AmountData] = None
+
+    @property
+    def additional_response_data(self) -> Optional[AdditionalResponseData]:
+        """
+        | Additional response data
+
+        Type: :class:`worldline.acquiring.sdk.v1.domain.additional_response_data.AdditionalResponseData`
+        """
+        return self.__additional_response_data
+
+    @additional_response_data.setter
+    def additional_response_data(self, value: Optional[AdditionalResponseData]) -> None:
+        self.__additional_response_data = value
 
     @property
     def card_payment_data(self) -> Optional[CardPaymentDataForResponse]:
@@ -40,19 +52,6 @@ class ApiPaymentResponse(DataObject):
     @card_payment_data.setter
     def card_payment_data(self, value: Optional[CardPaymentDataForResponse]) -> None:
         self.__card_payment_data = value
-
-    @property
-    def emv_data(self) -> Optional[List[EmvDataItem]]:
-        """
-        | EMV data of the card as tag/value pairs.
-
-        Type: list[:class:`worldline.acquiring.sdk.v1.domain.emv_data_item.EmvDataItem`]
-        """
-        return self.__emv_data
-
-    @emv_data.setter
-    def emv_data(self, value: Optional[List[EmvDataItem]]) -> None:
-        self.__emv_data = value
 
     @property
     def initial_authorization_code(self) -> Optional[str]:
@@ -171,22 +170,6 @@ class ApiPaymentResponse(DataObject):
         self.__response_code_description = value
 
     @property
-    def retry_after(self) -> Optional[str]:
-        """
-        | The duration to wait after the initial submission before retrying the payment.
-        | Expressed using ISO 8601 duration format, ex: PT2H for 2 hours.
-        | This field is only present when the payment can be retried later.
-        | PT0 means that the payment can be retried immediately.
-
-        Type: str
-        """
-        return self.__retry_after
-
-    @retry_after.setter
-    def retry_after(self, value: Optional[str]) -> None:
-        self.__retry_after = value
-
-    @property
     def status(self) -> Optional[str]:
         """
         | The status of the payment, refund or credit transfer
@@ -236,13 +219,10 @@ class ApiPaymentResponse(DataObject):
 
     def to_dictionary(self) -> dict:
         dictionary = super(ApiPaymentResponse, self).to_dictionary()
+        if self.additional_response_data is not None:
+            dictionary['additionalResponseData'] = self.additional_response_data.to_dictionary()
         if self.card_payment_data is not None:
             dictionary['cardPaymentData'] = self.card_payment_data.to_dictionary()
-        if self.emv_data is not None:
-            dictionary['emvData'] = []
-            for element in self.emv_data:
-                if element is not None:
-                    dictionary['emvData'].append(element.to_dictionary())
         if self.initial_authorization_code is not None:
             dictionary['initialAuthorizationCode'] = self.initial_authorization_code
         if self.operation_id is not None:
@@ -259,8 +239,6 @@ class ApiPaymentResponse(DataObject):
             dictionary['responseCodeCategory'] = self.response_code_category
         if self.response_code_description is not None:
             dictionary['responseCodeDescription'] = self.response_code_description
-        if self.retry_after is not None:
-            dictionary['retryAfter'] = self.retry_after
         if self.status is not None:
             dictionary['status'] = self.status
         if self.status_timestamp is not None:
@@ -271,18 +249,16 @@ class ApiPaymentResponse(DataObject):
 
     def from_dictionary(self, dictionary: dict) -> 'ApiPaymentResponse':
         super(ApiPaymentResponse, self).from_dictionary(dictionary)
+        if 'additionalResponseData' in dictionary:
+            if not isinstance(dictionary['additionalResponseData'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['additionalResponseData']))
+            value = AdditionalResponseData()
+            self.additional_response_data = value.from_dictionary(dictionary['additionalResponseData'])
         if 'cardPaymentData' in dictionary:
             if not isinstance(dictionary['cardPaymentData'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['cardPaymentData']))
             value = CardPaymentDataForResponse()
             self.card_payment_data = value.from_dictionary(dictionary['cardPaymentData'])
-        if 'emvData' in dictionary:
-            if not isinstance(dictionary['emvData'], list):
-                raise TypeError('value \'{}\' is not a list'.format(dictionary['emvData']))
-            self.emv_data = []
-            for element in dictionary['emvData']:
-                value = EmvDataItem()
-                self.emv_data.append(value.from_dictionary(element))
         if 'initialAuthorizationCode' in dictionary:
             self.initial_authorization_code = dictionary['initialAuthorizationCode']
         if 'operationId' in dictionary:
@@ -302,8 +278,6 @@ class ApiPaymentResponse(DataObject):
             self.response_code_category = dictionary['responseCodeCategory']
         if 'responseCodeDescription' in dictionary:
             self.response_code_description = dictionary['responseCodeDescription']
-        if 'retryAfter' in dictionary:
-            self.retry_after = dictionary['retryAfter']
         if 'status' in dictionary:
             self.status = dictionary['status']
         if 'statusTimestamp' in dictionary:
