@@ -6,6 +6,7 @@ from urllib.parse import ParseResult
 
 from .authenticator import Authenticator
 from .oauth2_exception import OAuth2Exception
+from .oauth2_scopes import OAuth2Scopes
 
 from worldline.acquiring.sdk.communicator_configuration import CommunicatorConfiguration
 from worldline.acquiring.sdk.communication.default_connection import DefaultConnection
@@ -45,18 +46,22 @@ class OAuth2Authenticator(Authenticator):
         self.__socket_timeout = communicator_configuration.socket_timeout
         self.__proxy_configuration = communicator_configuration.proxy_configuration
 
-        # Only a limited amount of scopes may be sent in one request.
-        # While at the moment all scopes fit in one request, keep this code so we can easily add more token types if necessary.
-        # The empty path will ensure that all paths will match, as each full path ends with an empty string.
-        self.__access_tokens = [
-            self.__TokenType("", "processing_payment", "processing_refund", "processing_credittransfer",
-                             "processing_accountverification", "processing_balanceinquiry",
-                             "processing_operation_reverse", "processing_dcc_rate", "services_ping"),
-        ]
+        oauth2_scopes = communicator_configuration.oauth2_scopes
+        if oauth2_scopes:
+            token_type = self.__TokenType("", oauth2_scopes)
+            self.__pathToTokenTypeMapper = lambda path : token_type
+        else:
+            # Only a limited amount of scopes may be sent in one request.
+            # While at the moment all scopes fit in one request, keep this code so we can easily add more token types if necessary.
+            # The empty path will ensure that all paths will match, as each full path ends with an empty string.
+            token_types = [
+                self.__TokenType("", str.join(" ", OAuth2Scopes.all())),
+            ]
+            self.__pathToTokenTypeMapper = lambda path: OAuth2Authenticator.__get_token_type(path, token_types)
 
     def get_authorization(self, http_method: Optional[str], resource_uri: Optional[ParseResult],
                           request_headers: Optional[Sequence[RequestHeader]]) -> str:
-        token_type = self.get_token_type(resource_uri.path)
+        token_type = self.__pathToTokenTypeMapper(resource_uri.path)
         with token_type.lock:
             if not token_type.access_token or token_type.access_token_expiration < datetime.now():
                 token_type.access_token, token_type.access_token_expiration = self.__get_access_token(token_type.scopes)
@@ -87,8 +92,9 @@ class OAuth2Authenticator(Authenticator):
             expiration_time = start_time + timedelta(seconds=access_token_response["expires_in"])
             return access_token_response["access_token"], expiration_time
 
-    def get_token_type(self, path: str):
-        for token_type_entry in self.__access_tokens:
+    @staticmethod
+    def __get_token_type(path: str, token_types: Sequence['__TokenType']):
+        for token_type_entry in token_types:
             path_with_trailing_slash = token_type_entry.path + "/"
             if path.endswith(token_type_entry.path) or path_with_trailing_slash in path:
                 return token_type_entry
@@ -103,8 +109,8 @@ class OAuth2Authenticator(Authenticator):
         return collected_body.decode('utf-8')
 
     class __TokenType:
-        def __init__(self, path, *scopes):
-            self.scopes = str.join(" ", scopes)
+        def __init__(self, path, scopes):
+            self.scopes = scopes
             self.path = path
             self.access_token = None
             self.access_token_expiration = None

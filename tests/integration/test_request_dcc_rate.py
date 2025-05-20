@@ -4,7 +4,7 @@ import tests.integration.init_utils as init_utils
 from tests.integration.init_utils import ACQUIRER_ID, MERCHANT_ID
 
 
-class ProcessPaymentTest(unittest.TestCase):
+class RequestDccRateTest(unittest.TestCase):
     def test_request_dcc_rate(self):
         """Smoke test for request DCC rate"""
         with init_utils.create_client() as client:

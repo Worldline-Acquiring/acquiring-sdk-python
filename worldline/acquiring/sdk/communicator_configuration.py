@@ -25,6 +25,7 @@ class CommunicatorConfiguration(object):
     __authorization_id: Optional[str] = None
     __authorization_secret: Optional[str] = None
     __oauth2_token_uri: Optional[str] = None
+    __oauth2_scopes: Optional[str] = None
     __proxy_configuration: Optional[ProxyConfiguration] = None
     __integrator: Optional[str] = None
     __shopping_cart_extension: Optional[ShoppingCartExtension] = None
@@ -33,7 +34,7 @@ class CommunicatorConfiguration(object):
                  api_endpoint: Union[str, ParseResult, None] = None,
                  authorization_id: Optional[str] = None, authorization_secret: Optional[str] = None,
                  oauth2_client_id: Optional[str] = None, oauth2_client_secret: Optional[str] = None,
-                 oauth2_token_uri: Optional[str] = None,
+                 oauth2_token_uri: Optional[str] = None, oauth2_scopes: Optional[str] = None,
                  authorization_type: Optional[str] = None,
                  connect_timeout: Optional[int] = None, socket_timeout: Optional[int] = None,
                  max_connections: Optional[int] = None, proxy_configuration: Optional[ProxyConfiguration] = None,
@@ -56,6 +57,10 @@ class CommunicatorConfiguration(object):
                 self.oauth2_token_uri = properties.get("AcquiringSDK", "acquiring.api.oauth2.tokenUri")
             except NoOptionError:
                 self.oauth2_token_uri = None
+            try:
+                self.oauth2_scopes = properties.get("AcquiringSDK", "acquiring.api.oauth2.scopes")
+            except NoOptionError:
+                self.oauth2_scopes = None
             try:
                 proxy_uri = properties.get("AcquiringSDK", "acquiring.api.proxy.uri")
             except NoOptionError:
@@ -93,6 +98,8 @@ class CommunicatorConfiguration(object):
             self.oauth2_client_secret = oauth2_client_secret
         if oauth2_token_uri:
             self.oauth2_token_uri = oauth2_token_uri
+        if oauth2_scopes:
+            self.oauth2_scopes = oauth2_scopes
         if authorization_type:
             self.authorization_type = authorization_type
         if connect_timeout:
@@ -248,6 +255,14 @@ class CommunicatorConfiguration(object):
     @ oauth2_token_uri.setter
     def oauth2_token_uri(self, oauth2_token_uri: Optional[str]) -> None:
         self.__oauth2_token_uri = oauth2_token_uri
+
+    @ property
+    def oauth2_scopes(self) -> Optional[str]:
+        return self.__oauth2_scopes
+
+    @ oauth2_scopes.setter
+    def oauth2_scopes(self, oauth2_scopes: Optional[str]) -> None:
+        self.__oauth2_scopes = oauth2_scopes
 
     @property
     def authorization_type(self) -> Optional[str]:

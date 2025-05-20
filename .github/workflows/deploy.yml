@@ -23,10 +23,12 @@ jobs:
         run: pip install twine requests==2.* requests-toolbelt==0.* appengine-python-standard
       - name: Build
         run: python setup.py sdist --formats gztar --dist-dir .
+      - name: Rename for PEP 625 compatibility
+        run: mv "acquiring-sdk-python-${SDK_VERSION}.tar.gz" "acquiring_sdk_python-${SDK_VERSION}.tar.gz"
       - name: Verify
-        run: twine check "acquiring-sdk-python-${SDK_VERSION}.tar.gz"
+        run: twine check "acquiring_sdk_python-${SDK_VERSION}.tar.gz"
       - name: Deploy
-        run: twine upload --username "${PYPI_USERNAME}" --password "${PYPI_PASSWORD}" "acquiring-sdk-python-${SDK_VERSION}.tar.gz"
+        run: twine upload --username "${PYPI_USERNAME}" --password "${PYPI_PASSWORD}" "acquiring_sdk_python-${SDK_VERSION}.tar.gz"
         env:
           PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
           PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}

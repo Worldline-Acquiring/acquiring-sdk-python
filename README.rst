@@ -48,13 +48,13 @@ To install the SDK using pip, execute the following command:
 
 Alternatively, you can install the SDK from a source distribution file:
 
-#. Download the latest version of the Python SDK from GitHub. Choose the ``acquiring-sdk-python-x.y.z.zip`` file from the `releases <https://github.com/Worldline-Acquiring/acquiring-sdk-python/releases>`__ page, where ``x.y.z`` is the version number.
+#. Download the latest version of the Python SDK from GitHub. Choose the ``acquiring_sdk_python-x.y.z.tar.gz`` file from the `releases <https://github.com/Worldline-Acquiring/acquiring-sdk-python/releases>`__ page, where ``x.y.z`` is the version number.
 
 #. Execute the following command in the folder where the SDK was downloaded to:
 
    .. code:: bash
 
-      pip install acquiring-sdk-python-x.y.z.zip
+      pip install acquiring_sdk_python-x.y.z.tar.gz
 
 Uninstalling
 ------------

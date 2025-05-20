@@ -40,6 +40,7 @@ class CommunicatorConfigurationTest(unittest.TestCase):
         self.assertDefaults(communicator_config)
         self.assertIsNone(communicator_config.authorization_id)
         self.assertIsNone(communicator_config.authorization_secret)
+        self.assertIsNone(communicator_config.oauth2_scopes)
         self.assertIsNone(communicator_config.proxy_configuration)
         self.assertIsNone(communicator_config.integrator)
         self.assertIsNone(communicator_config.shopping_cart_extension)
@@ -53,6 +54,7 @@ class CommunicatorConfigurationTest(unittest.TestCase):
         self.assertDefaults(communicator_config)
         self.assertIsNone(communicator_config.authorization_id)
         self.assertIsNone(communicator_config.authorization_secret)
+        self.assertIsNone(communicator_config.oauth2_scopes)
         proxy_config = communicator_config.proxy_configuration
         self.assertIsNotNone(proxy_config)
         self.assertEqual("http", proxy_config.scheme)
@@ -74,6 +76,7 @@ class CommunicatorConfigurationTest(unittest.TestCase):
         self.assertDefaults(communicator_config)
         self.assertIsNone(communicator_config.authorization_id)
         self.assertIsNone(communicator_config.authorization_secret)
+        self.assertIsNone(communicator_config.oauth2_scopes)
         proxy_config = communicator_config.proxy_configuration
         self.assertIsNotNone(proxy_config)
         self.assertEqual("http", proxy_config.scheme)
@@ -96,6 +99,7 @@ class CommunicatorConfigurationTest(unittest.TestCase):
         self.assertEqual(100, communicator_config.max_connections)
         self.assertIsNone(communicator_config.authorization_id)
         self.assertIsNone(communicator_config.authorization_secret)
+        self.assertIsNone(communicator_config.oauth2_scopes)
         self.assertIsNone(communicator_config.proxy_configuration)
 
     def test_construct_from_properties_with_host_and_scheme(self):
@@ -140,6 +144,7 @@ class CommunicatorConfigurationTest(unittest.TestCase):
         self.assertDefaults(communicator_config)
         self.assertIsNone(communicator_config.authorization_id)
         self.assertIsNone(communicator_config.authorization_secret)
+        self.assertIsNone(communicator_config.oauth2_scopes)
         self.assertIsNone(communicator_config.proxy_configuration)
         self.assertEqual("Worldline.Integrator", communicator_config.integrator)
         self.assertIsNotNone(communicator_config.shopping_cart_extension)
@@ -147,6 +152,17 @@ class CommunicatorConfigurationTest(unittest.TestCase):
         self.assertEqual("Worldline.ShoppingCarts", communicator_config.shopping_cart_extension.name)
         self.assertEqual("1.0", communicator_config.shopping_cart_extension.version)
         self.assertEqual("ExtensionId", communicator_config.shopping_cart_extension.extension_id)
+
+    def test_construct_from_properties_with_custom_oauth2_scopes(self):
+        """Tests that constructing a communicator configuration
+        using custom OAuth2 scopes constructs properly
+        """
+        self.config.set("AcquiringSDK", "acquiring.api.oauth2.scopes", "processing_dcc_rate invalid_scope")
+
+        communicator_config = CommunicatorConfiguration(self.config)
+
+        self.assertDefaults(communicator_config)
+        self.assertEqual("processing_dcc_rate invalid_scope", communicator_config.oauth2_scopes)
 
 
 if __name__ == '__main__':
