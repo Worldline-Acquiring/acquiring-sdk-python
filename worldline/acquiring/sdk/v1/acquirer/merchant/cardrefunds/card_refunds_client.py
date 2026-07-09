@@ -19,9 +19,9 @@ from worldline.acquiring.sdk.v1.domain.api_refund_reversal_request import ApiRef
 from worldline.acquiring.sdk.v1.exception_factory import create_exception
 
 
-class RefundsClient(ApiResource):
+class CardRefundsClient(ApiResource):
     """
-    Refunds client. Thread-safe.
+    CardRefunds client. Thread-safe.
     """
 
     def __init__(self, parent: ApiResource, path_context: Optional[Mapping[str, str]]):
@@ -29,13 +29,13 @@ class RefundsClient(ApiResource):
         :param parent:       :class:`worldline.acquiring.sdk.api_resource.ApiResource`
         :param path_context: Mapping[str, str]
         """
-        super(RefundsClient, self).__init__(parent=parent, path_context=path_context)
+        super(CardRefundsClient, self).__init__(parent=parent, path_context=path_context)
 
     def process_standalone_refund(self, body: ApiRefundRequest, context: Optional[CallContext] = None) -> ApiRefundResponse:
         """
-        Resource /processing/v1/{acquirerId}/{merchantId}/refunds - Create standalone refund
+        Resource /processing/v1/{acquirerId}/{merchantId}/refunds - Create standalone card refund
 
-        See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Refunds/operation/processStandaloneRefund
+        See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Card-Refunds/operation/processStandaloneRefund
 
         :param body:     :class:`worldline.acquiring.sdk.v1.domain.api_refund_request.ApiRefundRequest`
         :param context:  :class:`worldline.acquiring.sdk.call_context.CallContext`
@@ -66,12 +66,12 @@ class RefundsClient(ApiResource):
 
     def get_refund(self, refund_id: str, query: GetRefundParams, context: Optional[CallContext] = None) -> ApiRefundResource:
         """
-        Resource /processing/v1/{acquirerId}/{merchantId}/refunds/{refundId} - Retrieve refund
+        Resource /processing/v1/{acquirerId}/{merchantId}/refunds/{refundId} - Retrieve card refund
 
-        See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Refunds/operation/getRefund
+        See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Card-Refunds/operation/getRefund
 
         :param refund_id:  str
-        :param query:      :class:`worldline.acquiring.sdk.v1.acquirer.merchant.refunds.get_refund_params.GetRefundParams`
+        :param query:      :class:`worldline.acquiring.sdk.v1.acquirer.merchant.cardrefunds.get_refund_params.GetRefundParams`
         :param context:    :class:`worldline.acquiring.sdk.call_context.CallContext`
         :return: :class:`worldline.acquiring.sdk.v1.domain.api_refund_resource.ApiRefundResource`
         :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)
@@ -104,7 +104,7 @@ class RefundsClient(ApiResource):
         """
         Resource /processing/v1/{acquirerId}/{merchantId}/refunds/{refundId}/captures - Capture refund
 
-        See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Refunds/operation/captureRefund
+        See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Card-Refunds/operation/captureRefund
 
         :param refund_id:  str
         :param body:       :class:`worldline.acquiring.sdk.v1.domain.api_capture_request_for_refund.ApiCaptureRequestForRefund`
@@ -141,7 +141,7 @@ class RefundsClient(ApiResource):
         """
         Resource /processing/v1/{acquirerId}/{merchantId}/refunds/{refundId}/authorization-reversals - Reverse refund authorization
 
-        See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Refunds/operation/reverseRefundAuthorization
+        See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Card-Refunds/operation/reverseRefundAuthorization
 
         :param refund_id:  str
         :param body:       :class:`worldline.acquiring.sdk.v1.domain.api_refund_reversal_request.ApiRefundReversalRequest`

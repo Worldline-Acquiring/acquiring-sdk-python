@@ -11,7 +11,7 @@ from .transaction_data_for_dcc import TransactionDataForDcc
 from worldline.acquiring.sdk.domain.data_object import DataObject
 
 
-class GetDCCRateRequest(DataObject):
+class GetDccRateRequest(DataObject):
 
     __card_payment_data: Optional[CardDataForDcc] = None
     __operation_id: Optional[str] = None
@@ -96,7 +96,7 @@ class GetDCCRateRequest(DataObject):
         self.__transaction = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(GetDCCRateRequest, self).to_dictionary()
+        dictionary = super(GetDccRateRequest, self).to_dictionary()
         if self.card_payment_data is not None:
             dictionary['cardPaymentData'] = self.card_payment_data.to_dictionary()
         if self.operation_id is not None:
@@ -111,8 +111,8 @@ class GetDCCRateRequest(DataObject):
             dictionary['transaction'] = self.transaction.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary: dict) -> 'GetDCCRateRequest':
-        super(GetDCCRateRequest, self).from_dictionary(dictionary)
+    def from_dictionary(self, dictionary: dict) -> 'GetDccRateRequest':
+        super(GetDccRateRequest, self).from_dictionary(dictionary)
         if 'cardPaymentData' in dictionary:
             if not isinstance(dictionary['cardPaymentData'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['cardPaymentData']))

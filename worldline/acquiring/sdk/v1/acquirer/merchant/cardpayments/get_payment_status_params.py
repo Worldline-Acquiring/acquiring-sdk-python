@@ -12,7 +12,7 @@ class GetPaymentStatusParams(ParamRequest):
     """
     Query parameters for Retrieve payment
 
-    See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Payments/operation/getPaymentStatus
+    See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Card-Payments/operation/getPaymentStatus
     """
 
     __return_operations: Optional[bool] = None

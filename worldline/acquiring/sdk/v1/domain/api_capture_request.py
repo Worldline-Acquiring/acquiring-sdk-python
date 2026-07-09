@@ -6,7 +6,9 @@ from datetime import datetime
 from typing import Optional
 
 from .amount_data import AmountData
+from .capture_amount_breakdown_data import CaptureAmountBreakdownData
 from .dcc_data import DccData
+from .marketplace_data import MarketplaceData
 from .payment_references import PaymentReferences
 from .terminal_data import TerminalData
 
@@ -16,9 +18,11 @@ from worldline.acquiring.sdk.domain.data_object import DataObject
 class ApiCaptureRequest(DataObject):
 
     __amount: Optional[AmountData] = None
+    __capture_amount_breakdown_data: Optional[CaptureAmountBreakdownData] = None
     __capture_sequence_number: Optional[int] = None
     __dynamic_currency_conversion: Optional[DccData] = None
     __is_final: Optional[bool] = None
+    __marketplace_data: Optional[MarketplaceData] = None
     __operation_id: Optional[str] = None
     __references: Optional[PaymentReferences] = None
     __terminal_data: Optional[TerminalData] = None
@@ -36,6 +40,19 @@ class ApiCaptureRequest(DataObject):
     @amount.setter
     def amount(self, value: Optional[AmountData]) -> None:
         self.__amount = value
+
+    @property
+    def capture_amount_breakdown_data(self) -> Optional[CaptureAmountBreakdownData]:
+        """
+        | Additional data regarding the breakdown of the capture amount. This can include amounts such as tip. The amounts specified are included in the total capture ``amount``, the information is provided for data enrichment and reconciliation purposes.
+
+        Type: :class:`worldline.acquiring.sdk.v1.domain.capture_amount_breakdown_data.CaptureAmountBreakdownData`
+        """
+        return self.__capture_amount_breakdown_data
+
+    @capture_amount_breakdown_data.setter
+    def capture_amount_breakdown_data(self, value: Optional[CaptureAmountBreakdownData]) -> None:
+        self.__capture_amount_breakdown_data = value
 
     @property
     def capture_sequence_number(self) -> Optional[int]:
@@ -77,6 +94,19 @@ class ApiCaptureRequest(DataObject):
     @is_final.setter
     def is_final(self, value: Optional[bool]) -> None:
         self.__is_final = value
+
+    @property
+    def marketplace_data(self) -> Optional[MarketplaceData]:
+        """
+        | Additional data for marketplace transactions. Required when capturing VISA payments on behalf of sellers that are located in a different region than the marketplace. We advise marketplaces to always provide this data to ensure optimal processing of the transactions.
+
+        Type: :class:`worldline.acquiring.sdk.v1.domain.marketplace_data.MarketplaceData`
+        """
+        return self.__marketplace_data
+
+    @marketplace_data.setter
+    def marketplace_data(self, value: Optional[MarketplaceData]) -> None:
+        self.__marketplace_data = value
 
     @property
     def operation_id(self) -> Optional[str]:
@@ -135,12 +165,16 @@ class ApiCaptureRequest(DataObject):
         dictionary = super(ApiCaptureRequest, self).to_dictionary()
         if self.amount is not None:
             dictionary['amount'] = self.amount.to_dictionary()
+        if self.capture_amount_breakdown_data is not None:
+            dictionary['captureAmountBreakdownData'] = self.capture_amount_breakdown_data.to_dictionary()
         if self.capture_sequence_number is not None:
             dictionary['captureSequenceNumber'] = self.capture_sequence_number
         if self.dynamic_currency_conversion is not None:
             dictionary['dynamicCurrencyConversion'] = self.dynamic_currency_conversion.to_dictionary()
         if self.is_final is not None:
             dictionary['isFinal'] = self.is_final
+        if self.marketplace_data is not None:
+            dictionary['marketplaceData'] = self.marketplace_data.to_dictionary()
         if self.operation_id is not None:
             dictionary['operationId'] = self.operation_id
         if self.references is not None:
@@ -158,6 +192,11 @@ class ApiCaptureRequest(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['amount']))
             value = AmountData()
             self.amount = value.from_dictionary(dictionary['amount'])
+        if 'captureAmountBreakdownData' in dictionary:
+            if not isinstance(dictionary['captureAmountBreakdownData'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['captureAmountBreakdownData']))
+            value = CaptureAmountBreakdownData()
+            self.capture_amount_breakdown_data = value.from_dictionary(dictionary['captureAmountBreakdownData'])
         if 'captureSequenceNumber' in dictionary:
             self.capture_sequence_number = dictionary['captureSequenceNumber']
         if 'dynamicCurrencyConversion' in dictionary:
@@ -167,6 +206,11 @@ class ApiCaptureRequest(DataObject):
             self.dynamic_currency_conversion = value.from_dictionary(dictionary['dynamicCurrencyConversion'])
         if 'isFinal' in dictionary:
             self.is_final = dictionary['isFinal']
+        if 'marketplaceData' in dictionary:
+            if not isinstance(dictionary['marketplaceData'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['marketplaceData']))
+            value = MarketplaceData()
+            self.marketplace_data = value.from_dictionary(dictionary['marketplaceData'])
         if 'operationId' in dictionary:
             self.operation_id = dictionary['operationId']
         if 'references' in dictionary:

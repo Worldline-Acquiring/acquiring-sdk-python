@@ -5,6 +5,7 @@
 from datetime import datetime
 from typing import Optional
 
+from .amount_breakdown_data import AmountBreakdownData
 from .amount_data import AmountData
 from .card_payment_data import CardPaymentData
 from .dcc_data import DccData
@@ -18,6 +19,7 @@ from worldline.acquiring.sdk.domain.data_object import DataObject
 class ApiPaymentRequest(DataObject):
 
     __amount: Optional[AmountData] = None
+    __amount_breakdown_data: Optional[AmountBreakdownData] = None
     __authorization_type: Optional[str] = None
     __card_payment_data: Optional[CardPaymentData] = None
     __dynamic_currency_conversion: Optional[DccData] = None
@@ -39,6 +41,19 @@ class ApiPaymentRequest(DataObject):
     @amount.setter
     def amount(self, value: Optional[AmountData]) -> None:
         self.__amount = value
+
+    @property
+    def amount_breakdown_data(self) -> Optional[AmountBreakdownData]:
+        """
+        | Additional data regarding the breakdown of the transaction amount. This can include amounts such as tip or cashback. The amounts specified are included in the total transaction ``amount``, the information is provided for data enrichment and reconciliation purposes.
+
+        Type: :class:`worldline.acquiring.sdk.v1.domain.amount_breakdown_data.AmountBreakdownData`
+        """
+        return self.__amount_breakdown_data
+
+    @amount_breakdown_data.setter
+    def amount_breakdown_data(self, value: Optional[AmountBreakdownData]) -> None:
+        self.__amount_breakdown_data = value
 
     @property
     def authorization_type(self) -> Optional[str]:
@@ -150,6 +165,8 @@ class ApiPaymentRequest(DataObject):
         dictionary = super(ApiPaymentRequest, self).to_dictionary()
         if self.amount is not None:
             dictionary['amount'] = self.amount.to_dictionary()
+        if self.amount_breakdown_data is not None:
+            dictionary['amountBreakdownData'] = self.amount_breakdown_data.to_dictionary()
         if self.authorization_type is not None:
             dictionary['authorizationType'] = self.authorization_type
         if self.card_payment_data is not None:
@@ -175,6 +192,11 @@ class ApiPaymentRequest(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['amount']))
             value = AmountData()
             self.amount = value.from_dictionary(dictionary['amount'])
+        if 'amountBreakdownData' in dictionary:
+            if not isinstance(dictionary['amountBreakdownData'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['amountBreakdownData']))
+            value = AmountBreakdownData()
+            self.amount_breakdown_data = value.from_dictionary(dictionary['amountBreakdownData'])
         if 'authorizationType' in dictionary:
             self.authorization_type = dictionary['authorizationType']
         if 'cardPaymentData' in dictionary:

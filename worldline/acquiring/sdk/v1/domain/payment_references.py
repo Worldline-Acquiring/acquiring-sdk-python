@@ -28,9 +28,9 @@ class PaymentReferences(DataObject):
     @property
     def merchant_reference(self) -> Optional[str]:
         """
-        | Reference for the transaction to allow the merchant to reconcile their payments in our report files.
+        | Reference for the transaction to allow the merchant to reconcile their payments in our report files and in their disputes.
         | It is advised to submit a unique value per transaction.
-        | The value provided here is returned in the baseTrxType/addlMercData element of the MRX file.
+        | The value is returned in the baseTrxType/addlMercData element of the MRX file.
 
         Type: str
         """

@@ -17,7 +17,7 @@ from worldline.acquiring.sdk.v1.domain.api_payment_response import ApiPaymentRes
 from worldline.acquiring.sdk.v1.domain.card_data_for_dcc import CardDataForDcc
 from worldline.acquiring.sdk.v1.domain.card_payment_data import CardPaymentData
 from worldline.acquiring.sdk.v1.domain.e_commerce_data import ECommerceData
-from worldline.acquiring.sdk.v1.domain.get_dcc_rate_request import GetDCCRateRequest
+from worldline.acquiring.sdk.v1.domain.get_dcc_rate_request import GetDccRateRequest
 from worldline.acquiring.sdk.v1.domain.get_dcc_rate_response import GetDccRateResponse
 from worldline.acquiring.sdk.v1.domain.payment_references import PaymentReferences
 from worldline.acquiring.sdk.v1.domain.plain_card_data import PlainCardData
@@ -149,7 +149,7 @@ def get_dcc_rate_request(amount: int = 200):
     card_data_for_dcc.bin = "41766699"
     card_data_for_dcc.brand = "VISA"
 
-    request = GetDCCRateRequest()
+    request = GetDccRateRequest()
     request.operation_id = str(uuid4())
     request.target_currency = "EUR"
     request.card_payment_data = card_data_for_dcc
@@ -159,7 +159,7 @@ def get_dcc_rate_request(amount: int = 200):
     return request
 
 
-def assert_dcc_rate_response(self, request: GetDCCRateRequest, response: GetDccRateResponse):
+def assert_dcc_rate_response(self, request: GetDccRateRequest, response: GetDccRateResponse):
     self.assertIsNotNone(response.proposal)
     self.assertIsNotNone(response.proposal.original_amount)
     assert_equal_amounts(self, request.transaction.amount, response.proposal.original_amount)

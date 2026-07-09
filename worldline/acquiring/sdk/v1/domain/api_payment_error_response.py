@@ -11,6 +11,7 @@ class ApiPaymentErrorResponse(DataObject):
 
     __detail: Optional[str] = None
     __instance: Optional[str] = None
+    __request_id: Optional[str] = None
     __status: Optional[int] = None
     __title: Optional[str] = None
     __type: Optional[str] = None
@@ -42,6 +43,19 @@ class ApiPaymentErrorResponse(DataObject):
     @instance.setter
     def instance(self, value: Optional[str]) -> None:
         self.__instance = value
+
+    @property
+    def request_id(self) -> Optional[str]:
+        """
+        | The unique Worldline identifier for the request that resulted in this response.
+
+        Type: str
+        """
+        return self.__request_id
+
+    @request_id.setter
+    def request_id(self, value: Optional[str]) -> None:
+        self.__request_id = value
 
     @property
     def status(self) -> Optional[int]:
@@ -91,6 +105,8 @@ class ApiPaymentErrorResponse(DataObject):
             dictionary['detail'] = self.detail
         if self.instance is not None:
             dictionary['instance'] = self.instance
+        if self.request_id is not None:
+            dictionary['requestId'] = self.request_id
         if self.status is not None:
             dictionary['status'] = self.status
         if self.title is not None:
@@ -105,6 +121,8 @@ class ApiPaymentErrorResponse(DataObject):
             self.detail = dictionary['detail']
         if 'instance' in dictionary:
             self.instance = dictionary['instance']
+        if 'requestId' in dictionary:
+            self.request_id = dictionary['requestId']
         if 'status' in dictionary:
             self.status = dictionary['status']
         if 'title' in dictionary:

@@ -28,7 +28,7 @@ class AddressVerificationData(DataObject):
     @property
     def cardholder_postal_code(self) -> Optional[str]:
         """
-        | Cardholder postal code, should be provided without spaces
+        | Cardholder postal code
 
         Type: str
         """

@@ -45,7 +45,7 @@ class CardOnFileData(DataObject):
     @property
     def subsequent_card_on_file_data(self) -> Optional[SubsequentCardOnFileData]:
         """
-        | When you are using stored card you need to again specify the ``transactionType``. All values are supported when the MERCHANT is the initiator of the transaction. When the CARDHOLDER is the initiator of the transaction, only ``UNSCHEDULED_CARD_ON_FILE`` is supported. For all cases when the MERCHANT is the initiator of the transaction, the ``initialSchemeTransactionId`` property is mandatory.
+        | When you are using stored card you need to again specify the ``transactionType``. All values are supported when the MERCHANT is the initiator of the transaction. When the CARDHOLDER is the initiator of the transaction, only ``UNSCHEDULED_CARD_ON_FILE`` is supported. For all cases when the MERCHANT is the initiator of the transaction, the ``initialSchemeTransactionId`` property is mandatory. In case of MASTERCARD transactions, the ``initialSchemeTransactionLinkId`` should also be provided to support better linking of related transaction activity.
 
         Type: :class:`worldline.acquiring.sdk.v1.domain.subsequent_card_on_file_data.SubsequentCardOnFileData`
         """

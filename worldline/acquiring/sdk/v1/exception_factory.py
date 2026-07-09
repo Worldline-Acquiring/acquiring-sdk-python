@@ -20,6 +20,8 @@ def create_exception(status_code: int, body: str, error_object: Any, context: Op
         # get error based on status code, defaulting to ApiException
         return ERROR_MAP.get(status_code, ApiException)(status_code, body, type, title, status, detail, instance)
 
+    if error_object is None:
+        return create_exception_from_response_fields(None, None, None, None, None)
     if not isinstance(error_object, ApiPaymentErrorResponse):
         raise ValueError("Unsupported error object encountered: {}".format(error_object.__class__.__name__))
 

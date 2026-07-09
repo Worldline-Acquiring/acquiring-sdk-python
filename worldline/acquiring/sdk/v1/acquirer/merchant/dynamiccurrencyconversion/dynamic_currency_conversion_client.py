@@ -8,7 +8,7 @@ from worldline.acquiring.sdk.api_resource import ApiResource
 from worldline.acquiring.sdk.call_context import CallContext
 from worldline.acquiring.sdk.communication.response_exception import ResponseException
 from worldline.acquiring.sdk.v1.domain.api_payment_error_response import ApiPaymentErrorResponse
-from worldline.acquiring.sdk.v1.domain.get_dcc_rate_request import GetDCCRateRequest
+from worldline.acquiring.sdk.v1.domain.get_dcc_rate_request import GetDccRateRequest
 from worldline.acquiring.sdk.v1.domain.get_dcc_rate_response import GetDccRateResponse
 from worldline.acquiring.sdk.v1.exception_factory import create_exception
 
@@ -25,13 +25,13 @@ class DynamicCurrencyConversionClient(ApiResource):
         """
         super(DynamicCurrencyConversionClient, self).__init__(parent=parent, path_context=path_context)
 
-    def request_dcc_rate(self, body: GetDCCRateRequest, context: Optional[CallContext] = None) -> GetDccRateResponse:
+    def request_dcc_rate(self, body: GetDccRateRequest, context: Optional[CallContext] = None) -> GetDccRateResponse:
         """
         Resource /services/v1/{acquirerId}/{merchantId}/dcc-rates - Request DCC rate
 
         See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Dynamic-Currency-Conversion/operation/requestDccRate
 
-        :param body:     :class:`worldline.acquiring.sdk.v1.domain.get_dcc_rate_request.GetDCCRateRequest`
+        :param body:     :class:`worldline.acquiring.sdk.v1.domain.get_dcc_rate_request.GetDccRateRequest`
         :param context:  :class:`worldline.acquiring.sdk.call_context.CallContext`
         :return: :class:`worldline.acquiring.sdk.v1.domain.get_dcc_rate_response.GetDccRateResponse`
         :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)

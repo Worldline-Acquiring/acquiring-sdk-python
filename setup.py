@@ -21,7 +21,7 @@ def test_collector():
 
 setup(
     name="acquiring-sdk-python",
-    version="1.3.0",
+    version="2.0.0",
     author="Worldline Acquiring",
     author_email="github.acquiring@worldline.com",
     description="SDK to communicate with the Worldline Acquiring platform using the Worldline Acquiring API",

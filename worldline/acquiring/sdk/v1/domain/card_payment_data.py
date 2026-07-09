@@ -124,7 +124,15 @@ class CardPaymentData(DataObject):
     @property
     def cardholder_verification_method(self) -> Optional[str]:
         """
-        | Cardholder verification method used in the transaction
+        | Method used by the terminal or the e-commerce website to verify that the customer is the legitimate cardholder (a.k.a. CVM)
+        
+        * NONE: no cardholder verification performed
+        * CARD_SECURITY_CODE: the customer provided the card verification value (3 or 4 digits)
+        * THREE_DS: the customer completed an additional verification step with the card issuer
+        * SIGNATURE: the terminal prompted for a signature
+        * ONLINE_PIN: the terminal verifies the PIN online with the card issuer
+        * OFFLINE_PIN: the terminal verified the PIN with the EMV chip on the card
+        * CARDHOLDER_DEVICE: the cardholder device prompted the cardholder for authentication (a.k.a. CDCVM). Mainly used in transactions where digital wallets are involved
 
         Type: str
         """

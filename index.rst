@@ -380,35 +380,35 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: worldline.acquiring.sdk.v1.acquirer.merchant.cardpayments.card_payments_client
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.acquirer.merchant.cardpayments.get_payment_status_params
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.acquirer.merchant.cardrefunds.card_refunds_client
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.acquirer.merchant.cardrefunds.get_refund_params
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: worldline.acquiring.sdk.v1.acquirer.merchant.dynamiccurrencyconversion.dynamic_currency_conversion_client
-    :members:
-    :show-inheritance:
-    :undoc-members:
-    :special-members:
-    :exclude-members: __dict__,__weakref__,__module__,__get__
-
-.. automodule:: worldline.acquiring.sdk.v1.acquirer.merchant.payments.get_payment_status_params
-    :members:
-    :show-inheritance:
-    :undoc-members:
-    :special-members:
-    :exclude-members: __dict__,__weakref__,__module__,__get__
-
-.. automodule:: worldline.acquiring.sdk.v1.acquirer.merchant.payments.payments_client
-    :members:
-    :show-inheritance:
-    :undoc-members:
-    :special-members:
-    :exclude-members: __dict__,__weakref__,__module__,__get__
-
-.. automodule:: worldline.acquiring.sdk.v1.acquirer.merchant.refunds.get_refund_params
-    :members:
-    :show-inheritance:
-    :undoc-members:
-    :special-members:
-    :exclude-members: __dict__,__weakref__,__module__,__get__
-
-.. automodule:: worldline.acquiring.sdk.v1.acquirer.merchant.refunds.refunds_client
     :members:
     :show-inheritance:
     :undoc-members:
@@ -430,6 +430,13 @@ API Reference
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: worldline.acquiring.sdk.v1.domain.address_verification_data
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.amount_breakdown_data
     :members:
     :show-inheritance:
     :undoc-members:
@@ -625,6 +632,13 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: worldline.acquiring.sdk.v1.domain.capture_amount_breakdown_data
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: worldline.acquiring.sdk.v1.domain.card_data_for_dcc
     :members:
     :show-inheritance:
@@ -745,6 +759,13 @@ API Reference
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: worldline.acquiring.sdk.v1.domain.initial_card_on_file_data
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.marketplace_data
     :members:
     :show-inheritance:
     :undoc-members:

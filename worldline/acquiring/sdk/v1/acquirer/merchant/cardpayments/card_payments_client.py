@@ -24,9 +24,9 @@ from worldline.acquiring.sdk.v1.domain.api_reversal_response import ApiReversalR
 from worldline.acquiring.sdk.v1.exception_factory import create_exception
 
 
-class PaymentsClient(ApiResource):
+class CardPaymentsClient(ApiResource):
     """
-    Payments client. Thread-safe.
+    CardPayments client. Thread-safe.
     """
 
     def __init__(self, parent: ApiResource, path_context: Optional[Mapping[str, str]]):
@@ -34,13 +34,13 @@ class PaymentsClient(ApiResource):
         :param parent:       :class:`worldline.acquiring.sdk.api_resource.ApiResource`
         :param path_context: Mapping[str, str]
         """
-        super(PaymentsClient, self).__init__(parent=parent, path_context=path_context)
+        super(CardPaymentsClient, self).__init__(parent=parent, path_context=path_context)
 
     def process_payment(self, body: ApiPaymentRequest, context: Optional[CallContext] = None) -> ApiPaymentResponse:
         """
         Resource /processing/v1/{acquirerId}/{merchantId}/payments - Create payment
 
-        See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Payments/operation/processPayment
+        See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Card-Payments/operation/processPayment
 
         :param body:     :class:`worldline.acquiring.sdk.v1.domain.api_payment_request.ApiPaymentRequest`
         :param context:  :class:`worldline.acquiring.sdk.call_context.CallContext`
@@ -73,10 +73,10 @@ class PaymentsClient(ApiResource):
         """
         Resource /processing/v1/{acquirerId}/{merchantId}/payments/{paymentId} - Retrieve payment
 
-        See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Payments/operation/getPaymentStatus
+        See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Card-Payments/operation/getPaymentStatus
 
         :param payment_id:  str
-        :param query:       :class:`worldline.acquiring.sdk.v1.acquirer.merchant.payments.get_payment_status_params.GetPaymentStatusParams`
+        :param query:       :class:`worldline.acquiring.sdk.v1.acquirer.merchant.cardpayments.get_payment_status_params.GetPaymentStatusParams`
         :param context:     :class:`worldline.acquiring.sdk.call_context.CallContext`
         :return: :class:`worldline.acquiring.sdk.v1.domain.api_payment_resource.ApiPaymentResource`
         :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)
@@ -109,7 +109,7 @@ class PaymentsClient(ApiResource):
         """
         Resource /processing/v1/{acquirerId}/{merchantId}/payments/{paymentId}/captures - Capture payment
 
-        See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Payments/operation/simpleCaptureOfPayment
+        See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Card-Payments/operation/simpleCaptureOfPayment
 
         :param payment_id:  str
         :param body:        :class:`worldline.acquiring.sdk.v1.domain.api_capture_request.ApiCaptureRequest`
@@ -146,7 +146,7 @@ class PaymentsClient(ApiResource):
         """
         Resource /processing/v1/{acquirerId}/{merchantId}/payments/{paymentId}/authorization-reversals - Reverse authorization
 
-        See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Payments/operation/reverseAuthorization
+        See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Card-Payments/operation/reverseAuthorization
 
         :param payment_id:  str
         :param body:        :class:`worldline.acquiring.sdk.v1.domain.api_payment_reversal_request.ApiPaymentReversalRequest`
@@ -183,7 +183,7 @@ class PaymentsClient(ApiResource):
         """
         Resource /processing/v1/{acquirerId}/{merchantId}/payments/{paymentId}/increments - Increment authorization
 
-        See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Payments/operation/incrementPayment
+        See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Card-Payments/operation/incrementPayment
 
         :param payment_id:  str
         :param body:        :class:`worldline.acquiring.sdk.v1.domain.api_increment_request.ApiIncrementRequest`
@@ -218,9 +218,9 @@ class PaymentsClient(ApiResource):
 
     def create_refund(self, payment_id: str, body: ApiPaymentRefundRequest, context: Optional[CallContext] = None) -> ApiActionResponseForRefund:
         """
-        Resource /processing/v1/{acquirerId}/{merchantId}/payments/{paymentId}/refunds - Refund payment
+        Resource /processing/v1/{acquirerId}/{merchantId}/payments/{paymentId}/refunds - Refund card payment
 
-        See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Payments/operation/createRefund
+        See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Card-Payments/operation/createRefund
 
         :param payment_id:  str
         :param body:        :class:`worldline.acquiring.sdk.v1.domain.api_payment_refund_request.ApiPaymentRefundRequest`

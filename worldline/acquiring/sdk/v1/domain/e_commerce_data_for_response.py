@@ -19,13 +19,12 @@ class ECommerceDataForResponse(DataObject):
         | Possible values:
         
         * MATCH
-        * ADDRESS_MATCH_POSTAL_CODE_MISMATCH
-        * ADDRESS_MISMATCH_POSTAL_CODE_MATCH
-        * ADDRESS_MATCH_POSTAL_CODE_NOT_VERIFIED
-        * ADDRESS_NOT_VERIFIED_POSTAL_CODE_MATCH
+        * ADDRESS_MATCH
+        * POSTAL_CODE_MATCH
         * MISMATCH
-        * ERROR
         * NOT_VERIFIED
+        * OTHER
+        * ERROR
 
         Type: str
         """

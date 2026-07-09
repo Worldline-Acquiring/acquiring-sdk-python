@@ -10,9 +10,9 @@ from worldline.acquiring.sdk.communication.request_param import RequestParam
 
 class GetRefundParams(ParamRequest):
     """
-    Query parameters for Retrieve refund
+    Query parameters for Retrieve card refund
 
-    See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Refunds/operation/getRefund
+    See also https://docs.acquiring.worldline-solutions.com/api-reference#tag/Card-Refunds/operation/getRefund
     """
 
     __return_operations: Optional[bool] = None

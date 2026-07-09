@@ -3,7 +3,7 @@ import unittest
 import tests.integration.init_utils as init_utils
 from tests.integration.init_utils import ACQUIRER_ID, MERCHANT_ID
 
-from worldline.acquiring.sdk.v1.acquirer.merchant.payments.get_payment_status_params import GetPaymentStatusParams
+from worldline.acquiring.sdk.v1.acquirer.merchant.cardpayments.get_payment_status_params import GetPaymentStatusParams
 
 
 class ProcessPaymentTest(unittest.TestCase):

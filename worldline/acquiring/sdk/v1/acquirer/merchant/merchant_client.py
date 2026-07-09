@@ -7,9 +7,9 @@ from typing import Mapping, Optional
 from worldline.acquiring.sdk.api_resource import ApiResource
 from worldline.acquiring.sdk.v1.acquirer.merchant.accountverifications.account_verifications_client import AccountVerificationsClient
 from worldline.acquiring.sdk.v1.acquirer.merchant.balanceinquiries.balance_inquiries_client import BalanceInquiriesClient
+from worldline.acquiring.sdk.v1.acquirer.merchant.cardpayments.card_payments_client import CardPaymentsClient
+from worldline.acquiring.sdk.v1.acquirer.merchant.cardrefunds.card_refunds_client import CardRefundsClient
 from worldline.acquiring.sdk.v1.acquirer.merchant.dynamiccurrencyconversion.dynamic_currency_conversion_client import DynamicCurrencyConversionClient
-from worldline.acquiring.sdk.v1.acquirer.merchant.payments.payments_client import PaymentsClient
-from worldline.acquiring.sdk.v1.acquirer.merchant.refunds.refunds_client import RefundsClient
 from worldline.acquiring.sdk.v1.acquirer.merchant.technicalreversals.technical_reversals_client import TechnicalReversalsClient
 
 
@@ -25,21 +25,21 @@ class MerchantClient(ApiResource):
         """
         super(MerchantClient, self).__init__(parent=parent, path_context=path_context)
 
-    def payments(self) -> PaymentsClient:
+    def card_payments(self) -> CardPaymentsClient:
         """
         Resource /processing/v1/{acquirerId}/{merchantId}/payments
 
-        :return: :class:`worldline.acquiring.sdk.v1.acquirer.merchant.payments.payments_client.PaymentsClient`
+        :return: :class:`worldline.acquiring.sdk.v1.acquirer.merchant.cardpayments.card_payments_client.CardPaymentsClient`
         """
-        return PaymentsClient(self, None)
+        return CardPaymentsClient(self, None)
 
-    def refunds(self) -> RefundsClient:
+    def card_refunds(self) -> CardRefundsClient:
         """
         Resource /processing/v1/{acquirerId}/{merchantId}/refunds
 
-        :return: :class:`worldline.acquiring.sdk.v1.acquirer.merchant.refunds.refunds_client.RefundsClient`
+        :return: :class:`worldline.acquiring.sdk.v1.acquirer.merchant.cardrefunds.card_refunds_client.CardRefundsClient`
         """
-        return RefundsClient(self, None)
+        return CardRefundsClient(self, None)
 
     def account_verifications(self) -> AccountVerificationsClient:
         """
