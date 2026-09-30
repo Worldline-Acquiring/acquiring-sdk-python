@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>worldline.acquiring.sdk.v1.domain.dispute_response &#8212; acquiring-sdk-python 3.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../../../../../_static/documentation_options.js?v=acc74ff5"></script>
+    <script src="../../../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for worldline.acquiring.sdk.v1.domain.dispute_response</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1">#</span>
+<span class="c1"># This file was automatically generated.</span>
+<span class="c1">#</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.dispute_case_with_entries</span><span class="w"> </span><span class="kn">import</span> <span class="n">DisputeCaseWithEntries</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">worldline.acquiring.sdk.domain.data_object</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataObject</span>
+
+
+<div class="viewcode-block" id="DisputeResponse">
+<a class="viewcode-back" href="../../../../../../index.html#worldline.acquiring.sdk.v1.domain.dispute_response.DisputeResponse">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DisputeResponse</span><span class="p">(</span><span class="n">DataObject</span><span class="p">):</span>
+
+    <span class="n">__dispute</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DisputeCaseWithEntries</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__request_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dispute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DisputeCaseWithEntries</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        | A dispute represents a chargeback case. It contains details on the dispute and a history of entries that were done against the dispute during the lifecycle of the dispute.</span>
+<span class="sd">        |</span>
+<span class="sd">        | Each dispute has a unique ``disputeId`` that identifies it. You can use this ``disputeId`` to retrieve the details of the dispute and its history via the `Retrieve Dispute &lt;#operation/getDispute&gt;`_ endpoint, or to retrieve specific documents related to the dispute via the `Retrieve Dispute Document &lt;#operation/getDisputeDocument&gt;`_ endpoint.</span>
+<span class="sd">        |</span>
+<span class="sd">        | We return both the ``schemeReason``, which is the reason provided by the card scheme for the dispute, and the ``unifiedReason``, which is our mapping of the scheme reason to a unified reason that we use across all schemes. This allows you to easily filter disputes based on the ``unifiedReason``, while still having the ``schemeReason`` available for reference. The ``unifiedCategory`` is a high level category of the dispute reason, that we use to group similar ``unifiedReason`` values together.</span>
+<span class="sd">        |</span>
+<span class="sd">        | The ``disputeStatus`` field represents the current status of the dispute. The possible values for this field are specific to each card scheme, but we also provide a ``disputeStatusCategory`` field that groups the different ``disputeStatus`` values into a few high level categories that are consistent across all schemes. This allows you to easily filter disputes based on the ``disputeStatusCategory``, while still having the ``disputeStatus`` available for reference.</span>
+<span class="sd">        |</span>
+<span class="sd">        | The ``disputeStage`` field represents the current stage of the dispute in the dispute lifecycle. The possible values for this field represent the different stages that a dispute can be in during its lifecycle, such as "DISPUTE", "PRE_ARBITRATION", "ARBITRATION", etc.</span>
+<span class="sd">        |</span>
+<span class="sd">        | The ``originalDisputeAmount`` object represents the original amount of the dispute when it was first created. This amount can change during the lifecycle of the dispute, for example if the cardholder disputes only part of the original transaction amount, or if there are fees applied to the dispute. The ``merchantBalanceAmount`` field represents the current amount that's charged to or credited back to the merchant for this dispute. This amount can be different from the ``originalDisputeAmount`` due to partial disputes, fees, or if the dispute was challenged by the merchant and is currently being reviewed by the card scheme.</span>
+<span class="sd">        |</span>
+<span class="sd">        | The ``disputeReferences`` object contains a set of references related to the dispute, such as the acquirer dispute reference and the scheme dispute reference. These references can be used when communicating with the acquirer or the card scheme about the dispute.</span>
+<span class="sd">        |</span>
+<span class="sd">        | The ``DisputeDateTimeData`` object contains a set of date time fields related to the dispute, such as the opened date, response due date, closed date, etc. These fields can provide more context on the timeline of the dispute. When the ``disputeStatus`` is "EVIDENCE_REQUESTED", the ``responseDueDate`` field indicates the deadline to respond to the dispute.</span>
+<span class="sd">        |</span>
+<span class="sd">        | The ``originalTransactionData`` object contains data related to the original transaction that led to the dispute, such as transaction references, transaction amount, payment method data, etc. This information can be useful to understand the context of the dispute and to provide evidence when challenging the dispute.</span>
+<span class="sd">        |</span>
+<span class="sd">        | The ``merchantData`` object contains data related to the merchant involved in the dispute, such as merchant name, merchant category code, acquirer ID, etc. This information can also be useful to understand the context of the dispute and to provide evidence when challenging the dispute.</span>
+<span class="sd">        |</span>
+<span class="sd">        | Optionally the full history of entries for the dispute is included by setting the ``includeEntries`` parameter to ``true`` when retrieving the dispute details. Each entry in the history represents a step in the lifecycle of the dispute, such as when the dispute was opened, when evidence was requested by the acquirer, when evidence was provided by the merchant, when a credit adjustment was made by the acquirer, etc. The history is ordered from the oldest entry to the most recent one.</span>
+
+<span class="sd">        Type: :class:`worldline.acquiring.sdk.v1.domain.dispute_case_with_entries.DisputeCaseWithEntries`</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dispute</span>
+
+    <span class="nd">@dispute</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dispute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DisputeCaseWithEntries</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dispute</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">request_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        | The unique Worldline identifier for the request that resulted in this response.</span>
+
+<span class="sd">        Type: str</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__request_id</span>
+
+    <span class="nd">@request_id</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">request_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__request_id</span> <span class="o">=</span> <span class="n">value</span>
+
+<div class="viewcode-block" id="DisputeResponse.to_dictionary">
+<a class="viewcode-back" href="../../../../../../index.html#worldline.acquiring.sdk.v1.domain.dispute_response.DisputeResponse.to_dictionary">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">dictionary</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">DisputeResponse</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispute</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'dispute'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispute</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'requestId'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_id</span>
+        <span class="k">return</span> <span class="n">dictionary</span></div>
+
+
+<div class="viewcode-block" id="DisputeResponse.from_dictionary">
+<a class="viewcode-back" href="../../../../../../index.html#worldline.acquiring.sdk.v1.domain.dispute_response.DisputeResponse.from_dictionary">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'DisputeResponse'</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DisputeResponse</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">'dispute'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'dispute'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'dispute'</span><span class="p">]))</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">DisputeCaseWithEntries</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dispute</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'dispute'</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">'requestId'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">request_id</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'requestId'</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../../../index.html">acquiring-sdk-python</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;Copyright (c) 2024 Worldline Financial Services (Europe) SA.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

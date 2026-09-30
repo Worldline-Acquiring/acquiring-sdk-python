@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>worldline.acquiring.sdk.v1.domain.dispute_case &#8212; acquiring-sdk-python 3.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../../../../../_static/documentation_options.js?v=acc74ff5"></script>
+    <script src="../../../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for worldline.acquiring.sdk.v1.domain.dispute_case</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1">#</span>
+<span class="c1"># This file was automatically generated.</span>
+<span class="c1">#</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.amount_data</span><span class="w"> </span><span class="kn">import</span> <span class="n">AmountData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.dispute_date_time_data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DisputeDateTimeData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.dispute_merchant_data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DisputeMerchantData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.dispute_references</span><span class="w"> </span><span class="kn">import</span> <span class="n">DisputeReferences</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.original_transaction_data</span><span class="w"> </span><span class="kn">import</span> <span class="n">OriginalTransactionData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.signed_amount_data</span><span class="w"> </span><span class="kn">import</span> <span class="n">SignedAmountData</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">worldline.acquiring.sdk.domain.data_object</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataObject</span>
+
+
+<div class="viewcode-block" id="DisputeCase">
+<a class="viewcode-back" href="../../../../../../index.html#worldline.acquiring.sdk.v1.domain.dispute_case.DisputeCase">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DisputeCase</span><span class="p">(</span><span class="n">DataObject</span><span class="p">):</span>
+
+    <span class="n">__dispute_date_time_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DisputeDateTimeData</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__dispute_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__dispute_references</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DisputeReferences</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__dispute_stage</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__dispute_status</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__dispute_status_category</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__is_open</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__merchant_balance_amount</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SignedAmountData</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__merchant_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DisputeMerchantData</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__original_dispute_amount</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AmountData</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__original_transaction_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OriginalTransactionData</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__scheme_reason</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__scheme_reason_description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__unified_category</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__unified_reason</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dispute_date_time_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DisputeDateTimeData</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        | A set of date time fields related to the dispute case. Depending on the ``disputeStatus`` and ``disputeStage`` of the dispute, different date time fields are relevant. For example, when the ``disputeStatus`` is "EVIDENCE_REQUESTED", the ``responseDueDate`` field indicates the deadline to respond to the dispute.</span>
+<span class="sd">        |</span>
+<span class="sd">        | The ``closedDateTime`` field represents the date and time when the dispute was closed. This field is only returned for closed disputes. Disputes that are open too long are automatically closed.</span>
+
+<span class="sd">        Type: :class:`worldline.acquiring.sdk.v1.domain.dispute_date_time_data.DisputeDateTimeData`</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dispute_date_time_data</span>
+
+    <span class="nd">@dispute_date_time_data</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dispute_date_time_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DisputeDateTimeData</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dispute_date_time_data</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dispute_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        | The unique identifier for a dispute.</span>
+
+<span class="sd">        Type: str</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dispute_id</span>
+
+    <span class="nd">@dispute_id</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dispute_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dispute_id</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dispute_references</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DisputeReferences</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        | A set of references related to the dispute case.</span>
+
+<span class="sd">        Type: :class:`worldline.acquiring.sdk.v1.domain.dispute_references.DisputeReferences`</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dispute_references</span>
+
+    <span class="nd">@dispute_references</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dispute_references</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DisputeReferences</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dispute_references</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dispute_stage</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        | The current stage in the lifecycle of the dispute.</span>
+<span class="sd">        |</span>
+<span class="sd">        | Possible values are:</span>
+<span class="sd">        </span>
+<span class="sd">        * CREATED (The dispute case includes no dispute relevant information)</span>
+<span class="sd">        * FRAUD (The dispute case is opened with a fraud report (Issuer cases only))</span>
+<span class="sd">        * INQUIRY (Pre-dispute phase)</span>
+<span class="sd">        * DISPUTE (The dispute case reached the dispute stage, which includes dispute and representment handling)</span>
+<span class="sd">        * PRE_ARBITRATION (The dispute case is in the first stage of the case filing process, before escalation to arbitration)</span>
+<span class="sd">        * ARBITRATION (The dispute case filing process escalated to the arbitration phase)</span>
+<span class="sd">        * PRE_COMPLIANCE (The dispute case is in the first stage of the case filing process, before escalation to compliance)</span>
+<span class="sd">        * COMPLIANCE (The dispute case filing process escalated to the compliance phase)</span>
+
+<span class="sd">        Type: str</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dispute_stage</span>
+
+    <span class="nd">@dispute_stage</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dispute_stage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dispute_stage</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dispute_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        | The current status of the dispute.</span>
+<span class="sd">        |</span>
+<span class="sd">        | Possible values are:</span>
+<span class="sd">        </span>
+<span class="sd">        * For ``IN_PROGRESS`` dispute status category:</span>
+<span class="sd">        </span>
+<span class="sd">          * REVIEW_BY_ACQUIRER (Next action is on Acquirer side)</span>
+<span class="sd">          * REVIEW_BY_ISSUER (Next action is on Issuer side)</span>
+<span class="sd">          * REVIEW_BY_SCHEME (Next action is on Scheme side)</span>
+<span class="sd">        * For ``NEEDS_RESPONSE`` dispute status category:</span>
+<span class="sd">        </span>
+<span class="sd">          * EVIDENCE_REQUESTED (Acquirer request evidence from merchant)</span>
+<span class="sd">        * For ``WON`` dispute status category:</span>
+<span class="sd">        </span>
+<span class="sd">          * ISSUER_WITHDRAWN (Issuer withdraw the dispute and accept liability)</span>
+<span class="sd">          * SUCCESSFUL_DEFENSE (Acquirer dispute defense was successful)</span>
+<span class="sd">          * SCHEME_RULING (Dispute is escalated and scheme ruled in favor of Merchant)</span>
+<span class="sd">        * For ``LOST`` dispute status category:</span>
+<span class="sd">        </span>
+<span class="sd">          * UNSUCCESSFUL_DEFENSE (Acquirer dispute defense was not successful)</span>
+<span class="sd">          * UNANSWERED_EXPIRED (Dispute respond time expired, no further defense is possible)</span>
+<span class="sd">          * ACCEPTED (Acquirer accepted liability)</span>
+<span class="sd">          * SCHEME_RULING (Dispute is escalated and scheme ruled in favor of Issuer)</span>
+<span class="sd">        * For ``CANCELLED`` dispute status category:</span>
+<span class="sd">        </span>
+<span class="sd">          * DISPUTE_CANCELLED (Issuer withdrew the dispute)</span>
+
+<span class="sd">        Type: str</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dispute_status</span>
+
+    <span class="nd">@dispute_status</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dispute_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dispute_status</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dispute_status_category</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        | The category of the current status of the dispute.</span>
+<span class="sd">        |</span>
+<span class="sd">        | Possible values are:</span>
+<span class="sd">        </span>
+<span class="sd">        * IN_PROGRESS (Dispute process is ongoing and has no final decision. The merchant currently waits for further status updates.)</span>
+<span class="sd">        * NEEDS_RESPONSE (The merchant is contacted to provide supporting evidence documents before a deadline)</span>
+<span class="sd">        * WON (Dispute case has been won)</span>
+<span class="sd">        * LOST (Dispute case has been lost)</span>
+<span class="sd">        * CANCELLED (Dispute has been withdrawn)</span>
+
+<span class="sd">        Type: str</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dispute_status_category</span>
+
+    <span class="nd">@dispute_status_category</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dispute_status_category</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dispute_status_category</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_open</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        | Indicates whether the dispute is open or closed. An open dispute is a dispute that's still in the process of being resolved, while a closed dispute is a dispute that has been resolved.</span>
+
+<span class="sd">        Type: bool</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_open</span>
+
+    <span class="nd">@is_open</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__is_open</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">merchant_balance_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SignedAmountData</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        | Amount with an indicator whether it's a debit or credit amount.</span>
+
+<span class="sd">        Type: :class:`worldline.acquiring.sdk.v1.domain.signed_amount_data.SignedAmountData`</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__merchant_balance_amount</span>
+
+    <span class="nd">@merchant_balance_amount</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">merchant_balance_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SignedAmountData</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__merchant_balance_amount</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">merchant_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DisputeMerchantData</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        | Data related to the merchant involved in the dispute.</span>
+
+<span class="sd">        Type: :class:`worldline.acquiring.sdk.v1.domain.dispute_merchant_data.DisputeMerchantData`</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__merchant_data</span>
+
+    <span class="nd">@merchant_data</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">merchant_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DisputeMerchantData</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__merchant_data</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">original_dispute_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AmountData</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        | Amount for the operation.</span>
+
+<span class="sd">        Type: :class:`worldline.acquiring.sdk.v1.domain.amount_data.AmountData`</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__original_dispute_amount</span>
+
+    <span class="nd">@original_dispute_amount</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">original_dispute_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AmountData</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__original_dispute_amount</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">original_transaction_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OriginalTransactionData</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        | Data related to the original transaction that led to the dispute.</span>
+
+<span class="sd">        Type: :class:`worldline.acquiring.sdk.v1.domain.original_transaction_data.OriginalTransactionData`</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__original_transaction_data</span>
+
+    <span class="nd">@original_transaction_data</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">original_transaction_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OriginalTransactionData</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__original_transaction_data</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scheme_reason</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        | The reason provided by the card scheme for the dispute.</span>
+
+<span class="sd">        Type: str</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__scheme_reason</span>
+
+    <span class="nd">@scheme_reason</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scheme_reason</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__scheme_reason</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scheme_reason_description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        | The human readable description of the reason provided by the card scheme for the dispute.</span>
+
+<span class="sd">        Type: str</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__scheme_reason_description</span>
+
+    <span class="nd">@scheme_reason_description</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scheme_reason_description</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__scheme_reason_description</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unified_category</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        | The unified category of the dispute, used for categorization and reporting purposes. Only present if a dispute was received.</span>
+<span class="sd">        |</span>
+<span class="sd">        | Possible values are:</span>
+<span class="sd">        </span>
+<span class="sd">        * AUTHORIZATION_RELATED (authorization related disputes)</span>
+<span class="sd">        * FRAUD_RELATED (fraud related disputes)</span>
+<span class="sd">        * CONSUMER_DISPUTE (consumer initiated disputes)</span>
+<span class="sd">        * PROCESSING_ERROR (error during the payment processing leads to a dispute)</span>
+<span class="sd">        * OTHER (collection of diverse dispute reasons)</span>
+
+<span class="sd">        Type: str</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__unified_category</span>
+
+    <span class="nd">@unified_category</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unified_category</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__unified_category</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unified_reason</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        | The unified reason for the dispute, used for categorization and reporting purposes. Only present if a dispute was received.</span>
+<span class="sd">        |</span>
+<span class="sd">        | Possible values are:</span>
+<span class="sd">        </span>
+<span class="sd">        * FRAUDULENT_CARD_USAGE (Fraudulent use of card)</span>
+<span class="sd">        * UNAUTHORIZED_TRANSACTION (No valid Issuer authorization)</span>
+<span class="sd">        * GENERAL_PAYMENT_ERROR (General payment error)</span>
+<span class="sd">        * INVALID_TRANSACTION_TYPE (Invalid transaction type)</span>
+<span class="sd">        * INVALID_CURRENCY (Invalid currency)</span>
+<span class="sd">        * INVALID_CARD_NUMBER (Invalid card number)</span>
+<span class="sd">        * INVALID_AMOUNT (Invalid amount)</span>
+<span class="sd">        * DUPLICATE_CHARGE_OR_PAID_BY_OTHER_MEANS (Duplicate charge or paid by other means)</span>
+<span class="sd">        * GENERAL_CUSTOMER_DISPUTE (General customer dispute)</span>
+<span class="sd">        * GOODS_OR_SERVICES_NOT_RECEIVED (Goods or services not received)</span>
+<span class="sd">        * CANCELLED_SUBSCRIPTION (Cancelled subscription)</span>
+<span class="sd">        * GOODS_OR_SERVICES_NOT_MATCHING_ORDER (Goods or services not matching order)</span>
+<span class="sd">        * COUNTERFEIT_MERCHANDISE (Counterfeit merchandise)</span>
+<span class="sd">        * DUE_REFUND_NOT_RECEIVED (Due refund not received)</span>
+<span class="sd">        * CHARGE_NOT_ACCEPTED ((Subsequent) Charge not accepted)</span>
+<span class="sd">        * OTHER (Other)</span>
+
+<span class="sd">        Type: str</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__unified_reason</span>
+
+    <span class="nd">@unified_reason</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unified_reason</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__unified_reason</span> <span class="o">=</span> <span class="n">value</span>
+
+<div class="viewcode-block" id="DisputeCase.to_dictionary">
+<a class="viewcode-back" href="../../../../../../index.html#worldline.acquiring.sdk.v1.domain.dispute_case.DisputeCase.to_dictionary">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">dictionary</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">DisputeCase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispute_date_time_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'disputeDateTimeData'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispute_date_time_data</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispute_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'disputeId'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispute_id</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispute_references</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'disputeReferences'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispute_references</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispute_stage</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'disputeStage'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispute_stage</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispute_status</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'disputeStatus'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispute_status</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispute_status_category</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'disputeStatusCategory'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispute_status_category</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_open</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'isOpen'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_open</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">merchant_balance_amount</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'merchantBalanceAmount'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">merchant_balance_amount</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">merchant_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'merchantData'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">merchant_data</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">original_dispute_amount</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'originalDisputeAmount'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">original_dispute_amount</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">original_transaction_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'originalTransactionData'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">original_transaction_data</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheme_reason</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'schemeReason'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheme_reason</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheme_reason_description</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'schemeReasonDescription'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheme_reason_description</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unified_category</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'unifiedCategory'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unified_category</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unified_reason</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'unifiedReason'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unified_reason</span>
+        <span class="k">return</span> <span class="n">dictionary</span></div>
+
+
+<div class="viewcode-block" id="DisputeCase.from_dictionary">
+<a class="viewcode-back" href="../../../../../../index.html#worldline.acquiring.sdk.v1.domain.dispute_case.DisputeCase.from_dictionary">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'DisputeCase'</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DisputeCase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">'disputeDateTimeData'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'disputeDateTimeData'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'disputeDateTimeData'</span><span class="p">]))</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">DisputeDateTimeData</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dispute_date_time_data</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'disputeDateTimeData'</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">'disputeId'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dispute_id</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'disputeId'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'disputeReferences'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'disputeReferences'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'disputeReferences'</span><span class="p">]))</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">DisputeReferences</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dispute_references</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'disputeReferences'</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">'disputeStage'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dispute_stage</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'disputeStage'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'disputeStatus'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dispute_status</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'disputeStatus'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'disputeStatusCategory'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dispute_status_category</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'disputeStatusCategory'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'isOpen'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_open</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'isOpen'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'merchantBalanceAmount'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'merchantBalanceAmount'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'merchantBalanceAmount'</span><span class="p">]))</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">SignedAmountData</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">merchant_balance_amount</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'merchantBalanceAmount'</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">'merchantData'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'merchantData'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'merchantData'</span><span class="p">]))</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">DisputeMerchantData</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">merchant_data</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'merchantData'</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">'originalDisputeAmount'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'originalDisputeAmount'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'originalDisputeAmount'</span><span class="p">]))</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">AmountData</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">original_dispute_amount</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'originalDisputeAmount'</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">'originalTransactionData'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'originalTransactionData'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'originalTransactionData'</span><span class="p">]))</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">OriginalTransactionData</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">original_transaction_data</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'originalTransactionData'</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">'schemeReason'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scheme_reason</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'schemeReason'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'schemeReasonDescription'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scheme_reason_description</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'schemeReasonDescription'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'unifiedCategory'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unified_category</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'unifiedCategory'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'unifiedReason'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unified_reason</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'unifiedReason'</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../../../index.html">acquiring-sdk-python</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;Copyright (c) 2024 Worldline Financial Services (Europe) SA.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
