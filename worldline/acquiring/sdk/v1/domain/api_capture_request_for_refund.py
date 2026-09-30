@@ -5,6 +5,7 @@
 from datetime import datetime
 from typing import Optional
 
+from .capture_point_of_sale_data import CapturePointOfSaleData
 from .payment_references import PaymentReferences
 from .terminal_data import TerminalData
 
@@ -13,10 +14,22 @@ from worldline.acquiring.sdk.domain.data_object import DataObject
 
 class ApiCaptureRequestForRefund(DataObject):
 
+    __capture_point_of_sale_data: Optional[CapturePointOfSaleData] = None
     __operation_id: Optional[str] = None
     __references: Optional[PaymentReferences] = None
     __terminal_data: Optional[TerminalData] = None
     __transaction_timestamp: Optional[datetime] = None
+
+    @property
+    def capture_point_of_sale_data(self) -> Optional[CapturePointOfSaleData]:
+        """
+        Type: :class:`worldline.acquiring.sdk.v1.domain.capture_point_of_sale_data.CapturePointOfSaleData`
+        """
+        return self.__capture_point_of_sale_data
+
+    @capture_point_of_sale_data.setter
+    def capture_point_of_sale_data(self, value: Optional[CapturePointOfSaleData]) -> None:
+        self.__capture_point_of_sale_data = value
 
     @property
     def operation_id(self) -> Optional[str]:
@@ -73,6 +86,8 @@ class ApiCaptureRequestForRefund(DataObject):
 
     def to_dictionary(self) -> dict:
         dictionary = super(ApiCaptureRequestForRefund, self).to_dictionary()
+        if self.capture_point_of_sale_data is not None:
+            dictionary['capturePointOfSaleData'] = self.capture_point_of_sale_data.to_dictionary()
         if self.operation_id is not None:
             dictionary['operationId'] = self.operation_id
         if self.references is not None:
@@ -85,6 +100,11 @@ class ApiCaptureRequestForRefund(DataObject):
 
     def from_dictionary(self, dictionary: dict) -> 'ApiCaptureRequestForRefund':
         super(ApiCaptureRequestForRefund, self).from_dictionary(dictionary)
+        if 'capturePointOfSaleData' in dictionary:
+            if not isinstance(dictionary['capturePointOfSaleData'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['capturePointOfSaleData']))
+            value = CapturePointOfSaleData()
+            self.capture_point_of_sale_data = value.from_dictionary(dictionary['capturePointOfSaleData'])
         if 'operationId' in dictionary:
             self.operation_id = dictionary['operationId']
         if 'references' in dictionary:

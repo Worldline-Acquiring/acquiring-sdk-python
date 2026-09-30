@@ -32,7 +32,16 @@ class ECommerceData(DataObject):
     @property
     def sca_exemption_request(self) -> Optional[str]:
         """
-        | Strong customer authentication exemption request
+        | Strong customer authentication exemption request. Indicates the reason why the transaction may be exempt from SCA requirements.
+        |
+        | Possible values are:
+        
+        * LOW_VALUE_PAYMENT - Transaction amount is low enough to be exempt from SCA requirements.
+        * SCA_DELEGATION - Strong Customer Authentication (SCA) has been performed through other means.
+        * SECURE_CORPORATE_PAYMENT - The transaction is a secure corporate payment, using a corporate card.
+        * TRANSACTION_RISK_ANALYSIS - The transaction risk has been analyzed and deemed low.
+        * TRUSTED_BENEFICIARY - The beneficiary is a trusted entity with established relationship.
+        * AUTHENTICATION_OUTAGE - The authentication service is currently unavailable.
 
         Type: str
         """

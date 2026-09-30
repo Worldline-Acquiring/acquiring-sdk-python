@@ -7,6 +7,7 @@ from typing import Optional
 
 from .amount_data import AmountData
 from .capture_amount_breakdown_data import CaptureAmountBreakdownData
+from .capture_point_of_sale_data import CapturePointOfSaleData
 from .dcc_data import DccData
 from .marketplace_data import MarketplaceData
 from .payment_references import PaymentReferences
@@ -19,6 +20,7 @@ class ApiCaptureRequest(DataObject):
 
     __amount: Optional[AmountData] = None
     __capture_amount_breakdown_data: Optional[CaptureAmountBreakdownData] = None
+    __capture_point_of_sale_data: Optional[CapturePointOfSaleData] = None
     __capture_sequence_number: Optional[int] = None
     __dynamic_currency_conversion: Optional[DccData] = None
     __is_final: Optional[bool] = None
@@ -53,6 +55,17 @@ class ApiCaptureRequest(DataObject):
     @capture_amount_breakdown_data.setter
     def capture_amount_breakdown_data(self, value: Optional[CaptureAmountBreakdownData]) -> None:
         self.__capture_amount_breakdown_data = value
+
+    @property
+    def capture_point_of_sale_data(self) -> Optional[CapturePointOfSaleData]:
+        """
+        Type: :class:`worldline.acquiring.sdk.v1.domain.capture_point_of_sale_data.CapturePointOfSaleData`
+        """
+        return self.__capture_point_of_sale_data
+
+    @capture_point_of_sale_data.setter
+    def capture_point_of_sale_data(self, value: Optional[CapturePointOfSaleData]) -> None:
+        self.__capture_point_of_sale_data = value
 
     @property
     def capture_sequence_number(self) -> Optional[int]:
@@ -167,6 +180,8 @@ class ApiCaptureRequest(DataObject):
             dictionary['amount'] = self.amount.to_dictionary()
         if self.capture_amount_breakdown_data is not None:
             dictionary['captureAmountBreakdownData'] = self.capture_amount_breakdown_data.to_dictionary()
+        if self.capture_point_of_sale_data is not None:
+            dictionary['capturePointOfSaleData'] = self.capture_point_of_sale_data.to_dictionary()
         if self.capture_sequence_number is not None:
             dictionary['captureSequenceNumber'] = self.capture_sequence_number
         if self.dynamic_currency_conversion is not None:
@@ -197,6 +212,11 @@ class ApiCaptureRequest(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['captureAmountBreakdownData']))
             value = CaptureAmountBreakdownData()
             self.capture_amount_breakdown_data = value.from_dictionary(dictionary['captureAmountBreakdownData'])
+        if 'capturePointOfSaleData' in dictionary:
+            if not isinstance(dictionary['capturePointOfSaleData'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['capturePointOfSaleData']))
+            value = CapturePointOfSaleData()
+            self.capture_point_of_sale_data = value.from_dictionary(dictionary['capturePointOfSaleData'])
         if 'captureSequenceNumber' in dictionary:
             self.capture_sequence_number = dictionary['captureSequenceNumber']
         if 'dynamicCurrencyConversion' in dictionary:

@@ -422,6 +422,48 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: worldline.acquiring.sdk.v1.disputedocuments.dispute_documents_client
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.disputedocuments.upload_dispute_document_request
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.disputeentries.dispute_entries_client
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.disputemanagement.dispute_management_client
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.disputemanagement.get_dispute_params
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.accept_dispute_liability_request
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: worldline.acquiring.sdk.v1.domain.additional_response_data
     :members:
     :show-inheritance:
@@ -430,6 +472,13 @@ API Reference
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: worldline.acquiring.sdk.v1.domain.address_verification_data
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.aes_ukpt_pin_encryption_data
     :members:
     :show-inheritance:
     :undoc-members:
@@ -632,7 +681,35 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: worldline.acquiring.sdk.v1.domain.by_acquirer_ids
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.by_merchant_ids
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.by_merchant_root_ids
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: worldline.acquiring.sdk.v1.domain.capture_amount_breakdown_data
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.capture_point_of_sale_data
     :members:
     :show-inheritance:
     :undoc-members:
@@ -695,6 +772,27 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: worldline.acquiring.sdk.v1.domain.customer_service_data
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.date_range
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.date_time_range
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: worldline.acquiring.sdk.v1.domain.dcc_data
     :members:
     :show-inheritance:
@@ -703,6 +801,104 @@ API Reference
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: worldline.acquiring.sdk.v1.domain.dcc_proposal
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.dispute_case
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.dispute_case_with_entries
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.dispute_date_time_data
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.dispute_document
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.dispute_document_id_item
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.dispute_entry
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.dispute_entry_resources
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.dispute_entry_with_dispute_summary
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.dispute_merchant_data
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.dispute_merchant_data_base
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.dispute_references
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.dispute_response
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.dispute_summary
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.dukpt_pin_encryption_data
     :members:
     :show-inheritance:
     :undoc-members:
@@ -779,6 +975,27 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: worldline.acquiring.sdk.v1.domain.merchant_id_item
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.merchant_root_id_item
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.merchant_scope
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: worldline.acquiring.sdk.v1.domain.network_token_data
     :members:
     :show-inheritance:
@@ -786,7 +1003,70 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: worldline.acquiring.sdk.v1.domain.online_pin_data
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.original_transaction_data
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.original_transaction_references
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.original_transaction_summary_data
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.pagination_request
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.pagination_response
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.payment_method_data
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.payment_method_data_base
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: worldline.acquiring.sdk.v1.domain.payment_references
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.pin_encryption_data
     :members:
     :show-inheritance:
     :undoc-members:
@@ -828,6 +1108,27 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: worldline.acquiring.sdk.v1.domain.search_dispute_entries_request
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.search_disputes_request
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.search_disputes_response
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: worldline.acquiring.sdk.v1.domain.service_location_address
     :members:
     :show-inheritance:
@@ -842,6 +1143,13 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: worldline.acquiring.sdk.v1.domain.signed_amount_data
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: worldline.acquiring.sdk.v1.domain.sub_operation
     :members:
     :show-inheritance:
@@ -850,6 +1158,13 @@ API Reference
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: worldline.acquiring.sdk.v1.domain.sub_operation_for_refund
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.submit_evidence_request
     :members:
     :show-inheritance:
     :undoc-members:
@@ -878,6 +1193,34 @@ API Reference
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: worldline.acquiring.sdk.v1.domain.transaction_data_for_dcc
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.transaction_references_base
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.transaction_references_dispute
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.upload_document_response
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: worldline.acquiring.sdk.v1.domain.zpk_pin_encryption_data
     :members:
     :show-inheritance:
     :undoc-members:

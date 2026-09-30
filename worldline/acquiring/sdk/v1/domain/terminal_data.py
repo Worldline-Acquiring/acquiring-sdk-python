@@ -14,6 +14,7 @@ class TerminalData(DataObject):
     __cardholder_activated_terminal_level: Optional[str] = None
     __is_attended_terminal: Optional[bool] = None
     __is_offline_approved: Optional[bool] = None
+    __mpos_device: Optional[str] = None
     __offline_authorization_response_code: Optional[str] = None
     __pin_entry_capability: Optional[str] = None
     __terminal_id: Optional[str] = None
@@ -83,6 +84,22 @@ class TerminalData(DataObject):
     @is_offline_approved.setter
     def is_offline_approved(self, value: Optional[bool]) -> None:
         self.__is_offline_approved = value
+
+    @property
+    def mpos_device(self) -> Optional[str]:
+        """
+        | The type of device (mobile POS) used by the merchant as the terminal for accepting mPOS. Possible values are:
+        
+        * MPOS_TERMINAL_WITH_PCI_DONGLE - Merchant uses a POS terminal with a PCI dongle
+        * COMMERCIAL_OFF_THE_SHELF - Commercial off-the-shelf device
+
+        Type: str
+        """
+        return self.__mpos_device
+
+    @mpos_device.setter
+    def mpos_device(self, value: Optional[str]) -> None:
+        self.__mpos_device = value
 
     @property
     def offline_authorization_response_code(self) -> Optional[str]:
@@ -162,6 +179,8 @@ class TerminalData(DataObject):
             dictionary['isAttendedTerminal'] = self.is_attended_terminal
         if self.is_offline_approved is not None:
             dictionary['isOfflineApproved'] = self.is_offline_approved
+        if self.mpos_device is not None:
+            dictionary['mposDevice'] = self.mpos_device
         if self.offline_authorization_response_code is not None:
             dictionary['offlineAuthorizationResponseCode'] = self.offline_authorization_response_code
         if self.pin_entry_capability is not None:
@@ -188,6 +207,8 @@ class TerminalData(DataObject):
             self.is_attended_terminal = dictionary['isAttendedTerminal']
         if 'isOfflineApproved' in dictionary:
             self.is_offline_approved = dictionary['isOfflineApproved']
+        if 'mposDevice' in dictionary:
+            self.mpos_device = dictionary['mposDevice']
         if 'offlineAuthorizationResponseCode' in dictionary:
             self.offline_authorization_response_code = dictionary['offlineAuthorizationResponseCode']
         if 'pinEntryCapability' in dictionary:

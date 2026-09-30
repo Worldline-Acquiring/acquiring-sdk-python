@@ -5,6 +5,7 @@
 from typing import Optional
 
 from .network_token_data import NetworkTokenData
+from .original_transaction_references import OriginalTransactionReferences
 from .plain_card_data import PlainCardData
 from .point_of_sale_data import PointOfSaleData
 
@@ -20,6 +21,7 @@ class CardPaymentDataForRefund(DataObject):
     __card_entry_mode: Optional[str] = None
     __cardholder_verification_method: Optional[str] = None
     __network_token_data: Optional[NetworkTokenData] = None
+    __original_transaction_references: Optional[OriginalTransactionReferences] = None
     __point_of_sale_data: Optional[PointOfSaleData] = None
     __wallet_id: Optional[str] = None
 
@@ -121,6 +123,19 @@ class CardPaymentDataForRefund(DataObject):
         self.__network_token_data = value
 
     @property
+    def original_transaction_references(self) -> Optional[OriginalTransactionReferences]:
+        """
+        | References to the original transaction
+
+        Type: :class:`worldline.acquiring.sdk.v1.domain.original_transaction_references.OriginalTransactionReferences`
+        """
+        return self.__original_transaction_references
+
+    @original_transaction_references.setter
+    def original_transaction_references(self, value: Optional[OriginalTransactionReferences]) -> None:
+        self.__original_transaction_references = value
+
+    @property
     def point_of_sale_data(self) -> Optional[PointOfSaleData]:
         """
         | Request data for Point Of Sale (POS) or "in person" Transaction
@@ -169,6 +184,8 @@ class CardPaymentDataForRefund(DataObject):
             dictionary['cardholderVerificationMethod'] = self.cardholder_verification_method
         if self.network_token_data is not None:
             dictionary['networkTokenData'] = self.network_token_data.to_dictionary()
+        if self.original_transaction_references is not None:
+            dictionary['originalTransactionReferences'] = self.original_transaction_references.to_dictionary()
         if self.point_of_sale_data is not None:
             dictionary['pointOfSaleData'] = self.point_of_sale_data.to_dictionary()
         if self.wallet_id is not None:
@@ -197,6 +214,11 @@ class CardPaymentDataForRefund(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['networkTokenData']))
             value = NetworkTokenData()
             self.network_token_data = value.from_dictionary(dictionary['networkTokenData'])
+        if 'originalTransactionReferences' in dictionary:
+            if not isinstance(dictionary['originalTransactionReferences'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['originalTransactionReferences']))
+            value = OriginalTransactionReferences()
+            self.original_transaction_references = value.from_dictionary(dictionary['originalTransactionReferences'])
         if 'pointOfSaleData' in dictionary:
             if not isinstance(dictionary['pointOfSaleData'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['pointOfSaleData']))

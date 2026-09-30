@@ -6,6 +6,9 @@ from typing import Mapping, Optional
 
 from worldline.acquiring.sdk.api_resource import ApiResource
 from worldline.acquiring.sdk.v1.acquirer.acquirer_client import AcquirerClient
+from worldline.acquiring.sdk.v1.disputedocuments.dispute_documents_client import DisputeDocumentsClient
+from worldline.acquiring.sdk.v1.disputeentries.dispute_entries_client import DisputeEntriesClient
+from worldline.acquiring.sdk.v1.disputemanagement.dispute_management_client import DisputeManagementClient
 from worldline.acquiring.sdk.v1.ping.ping_client import PingClient
 
 
@@ -41,3 +44,27 @@ class V1Client(ApiResource):
         :return: :class:`worldline.acquiring.sdk.v1.ping.ping_client.PingClient`
         """
         return PingClient(self, None)
+
+    def dispute_management(self) -> DisputeManagementClient:
+        """
+        Resource /dispute-management/v1/disputes/search
+
+        :return: :class:`worldline.acquiring.sdk.v1.disputemanagement.dispute_management_client.DisputeManagementClient`
+        """
+        return DisputeManagementClient(self, None)
+
+    def dispute_documents(self) -> DisputeDocumentsClient:
+        """
+        Resource /dispute-management/v1/documents
+
+        :return: :class:`worldline.acquiring.sdk.v1.disputedocuments.dispute_documents_client.DisputeDocumentsClient`
+        """
+        return DisputeDocumentsClient(self, None)
+
+    def dispute_entries(self) -> DisputeEntriesClient:
+        """
+        Resource /dispute-management/v1/dispute-entries/search
+
+        :return: :class:`worldline.acquiring.sdk.v1.disputeentries.dispute_entries_client.DisputeEntriesClient`
+        """
+        return DisputeEntriesClient(self, None)

@@ -10,7 +10,7 @@ class ProcessPaymentTest(unittest.TestCase):
     def test_process_payment(self):
         """Smoke test for process payment"""
         with init_utils.create_client() as client:
-            payments_client = client.v1().acquirer(ACQUIRER_ID).merchant(MERCHANT_ID).payments()
+            payments_client = client.v1().acquirer(ACQUIRER_ID).merchant(MERCHANT_ID).card_payments()
 
             request = init_utils.get_api_payment_request()
             response = payments_client.process_payment(request)
