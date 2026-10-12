@@ -15,7 +15,9 @@ class PaymentReferences(DataObject):
     @property
     def dynamic_descriptor(self) -> Optional[str]:
         """
-        | Dynamic descriptor gives you the ability to control the descriptor on the credit card statement of the customer.
+        | Custom text provided by the merchant that is shown to the customer on their account statement, next to or instead of the registered merchant name. Support and maximum length depend on the payment method.
+        |
+        | Note that there are restrictions on length and allowed characters that differ depending on the brand and scheme. If this string is too long it's usually truncated.
 
         Type: str
         """
@@ -28,7 +30,10 @@ class PaymentReferences(DataObject):
     @property
     def merchant_reference(self) -> Optional[str]:
         """
-        | Reference for the transaction to allow the merchant to reconcile their payments in our report files and in their disputes.
+        | Custom text provided by the merchant that appears on their own settlement reports and on the reimbursement notices from the acquirer.
+        |
+        | It allows the merchant to reconcile their payments in our report files and in their disputes.
+        |
         | It is advised to submit a unique value per transaction.
         | The value is returned in the baseTrxType/addlMercData element of the MRX file.
 

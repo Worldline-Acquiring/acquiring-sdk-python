@@ -2,6 +2,7 @@
 #
 # This file was automatically generated.
 #
+from datetime import date
 from typing import Optional
 
 from .card_data_for_dcc import CardDataForDcc
@@ -15,6 +16,7 @@ class GetDccRateRequest(DataObject):
 
     __card_payment_data: Optional[CardDataForDcc] = None
     __operation_id: Optional[str] = None
+    __original_payment_date: Optional[date] = None
     __point_of_sale_data: Optional[PointOfSaleDataForDcc] = None
     __rate_reference_id: Optional[str] = None
     __target_currency: Optional[str] = None
@@ -47,6 +49,19 @@ class GetDccRateRequest(DataObject):
         self.__operation_id = value
 
     @property
+    def original_payment_date(self) -> Optional[date]:
+        """
+        | The date of the original payment. Our system will try to return the original rate associated with the provided ``originalPaymentDate``, but it may not always be possible to retrieve the exact original rate. If possible you should use ``rateReferenceId`` instead.
+
+        Type: date
+        """
+        return self.__original_payment_date
+
+    @original_payment_date.setter
+    def original_payment_date(self, value: Optional[date]) -> None:
+        self.__original_payment_date = value
+
+    @property
     def point_of_sale_data(self) -> Optional[PointOfSaleDataForDcc]:
         """
         Type: :class:`worldline.acquiring.sdk.v1.domain.point_of_sale_data_for_dcc.PointOfSaleDataForDcc`
@@ -61,7 +76,9 @@ class GetDccRateRequest(DataObject):
     def rate_reference_id(self) -> Optional[str]:
         """
         | The reference of a previously used rate
-        | This can be used in case of refund if you want to use the same rate as the original transaction.
+        | This can be used in case of any follow-up action for which you want to reference the original rate. Our system will try to return the original rate associated with the provided ``rateReferenceId``.
+        |
+        | Alternatively you can provide ``originalPaymentDate`` to reference the date of the original payment. Our system will try to return the original rate associated with the provided ``originalPaymentDate``, but it may not always be possible to retrieve the exact original rate. If possible you should use ``rateReferenceId`` instead.
 
         Type: str
         """
@@ -101,6 +118,8 @@ class GetDccRateRequest(DataObject):
             dictionary['cardPaymentData'] = self.card_payment_data.to_dictionary()
         if self.operation_id is not None:
             dictionary['operationId'] = self.operation_id
+        if self.original_payment_date is not None:
+            dictionary['originalPaymentDate'] = DataObject.format_date(self.original_payment_date)
         if self.point_of_sale_data is not None:
             dictionary['pointOfSaleData'] = self.point_of_sale_data.to_dictionary()
         if self.rate_reference_id is not None:
@@ -120,6 +139,8 @@ class GetDccRateRequest(DataObject):
             self.card_payment_data = value.from_dictionary(dictionary['cardPaymentData'])
         if 'operationId' in dictionary:
             self.operation_id = dictionary['operationId']
+        if 'originalPaymentDate' in dictionary:
+            self.original_payment_date = DataObject.parse_date(dictionary['originalPaymentDate'])
         if 'pointOfSaleData' in dictionary:
             if not isinstance(dictionary['pointOfSaleData'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['pointOfSaleData']))

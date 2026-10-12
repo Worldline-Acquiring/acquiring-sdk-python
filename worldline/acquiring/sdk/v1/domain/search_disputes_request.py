@@ -140,7 +140,10 @@ class SearchDisputesRequest(DataObject):
     @property
     def merchant_reference(self) -> Optional[str]:
         """
-        | Reference for the transaction to allow the merchant to reconcile their payments in our report files and in their disputes.
+        | Custom text provided by the merchant that appears on their own settlement reports and on the reimbursement notices from the acquirer.
+        |
+        | It allows the merchant to reconcile their payments in our report files and in their disputes.
+        |
         | It is advised to submit a unique value per transaction.
         | The value is returned in the baseTrxType/addlMercData element of the MRX file.
 

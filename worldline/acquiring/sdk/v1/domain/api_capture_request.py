@@ -97,8 +97,9 @@ class ApiCaptureRequest(DataObject):
     @property
     def is_final(self) -> Optional[bool]:
         """
-        | Indicates whether this partial capture is the final one.
-        | Not needed for full capture.
+        | Indicates whether this partial capture is the final one. When set to ``true``, the part of the authorization that was not captured is released. Not needed for a full capture.
+        |
+        | Note: the default value of ``false`` is not intuitive. Please send always a value and don't rely on the default, it might change with the next major API version
 
         Type: bool
         """
