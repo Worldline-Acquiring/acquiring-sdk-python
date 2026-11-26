@@ -21,12 +21,12 @@ def test_collector():
 
 setup(
     name="acquiring-sdk-python",
-    version="3.1.0",
+    version="4.0.0",
     author="Worldline Acquiring",
     author_email="github.acquiring@worldline.com",
     description="SDK to communicate with the Worldline Acquiring platform using the Worldline Acquiring API",
     license="MIT",
-    platforms="python 3.7",
+    platforms="python 3.11",
     keywords="Worldline Acquiring SDK",
     url="https://github.com/Worldline-Acquiring/acquiring-sdk-python",
     packages=find_packages(
@@ -47,21 +47,19 @@ setup(
         "Operating System :: Microsoft :: Windows",
         "Intended Audience :: Developers",
         "Programming Language :: Python :: 3 :: Only",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: 3.13",
+        "Programming Language :: Python :: 3.14",
+        "Programming Language :: Python :: 3.15",
         "Topic :: Office/Business :: Financial",
         "License :: OSI Approved :: MIT License"
     ],
     scripts=[],  # executable python scripts, none since this is a library
-    python_requires=">= 3.7",
+    python_requires=">= 3.11",
     install_requires=[
-        "requests >= 2.25.0",
-        "requests-toolbelt >= 0.8.0"
+        "requests >= 2.32.4",
+        "requests-toolbelt >= 1.0.0"
     ],
     # test_suite="tests/run_unit_tests"   # enables command 'pip acquiring-sdk-python test', which runs unit tests)
 

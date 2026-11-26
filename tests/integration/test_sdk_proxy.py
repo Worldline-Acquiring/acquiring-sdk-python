@@ -4,6 +4,7 @@ from tests.integration import init_utils
 from tests.integration.init_utils import ACQUIRER_ID, MERCHANT_ID
 
 
+@unittest.skipIf(init_utils.PROXY_URI is None, "environment variable acquiring.api.proxy.uri must be set")
 class SDKProxyTest(unittest.TestCase):
     def test_sdk_proxy(self):
         with init_utils.create_client_with_proxy() as client:

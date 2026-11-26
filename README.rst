@@ -30,10 +30,10 @@ Note that the source code of the unit tests and integration tests can only be fo
 Requirements
 ------------
 
-Python 3.7 or higher is required. In addition, the following packages are required:
+Python 3.11 or higher is required. In addition, the following packages are required:
 
--  `requests <https://requests.readthedocs.io/>`__ 2.25.0 or higher
--  `requests-toolbelt <https://toolbelt.readthedocs.io/>`__ 0.8.0 or higher
+-  `requests <https://requests.readthedocs.io/>`__ 2.32.4 or higher
+-  `requests-toolbelt <https://toolbelt.readthedocs.io/>`__ 1.0.0 or higher
 
 These packages will be installed automatically if the SDK is installed manually or using pip following the below instructions.
 
@@ -77,13 +77,12 @@ First, some environment variables need to be set:
 -  ``acquiring.api.oauth2.clientSecret`` for the OAuth2 client secret to use.
 -  ``acquiring.api.merchantId`` for your merchant ID.
 
-In addition, to run the proxy integration tests, the proxy URI, username and password should be set in the ``tests/resources/configuration.proxy.ini`` file.
+In addition, to run the proxy integration tests, the following environment variables need to be set:
 
-In order to run the unit and integration tests, the `mock <https://pypi.python.org/pypi/mock>`__ backport and `mockito <https://pypi.python.org/pypi/mockito>`__ are required. These can be installed using the following command:
+-  ``acquiring.api.proxy.uri`` for the URI of the proxy to use.
+-  ``acquiring.api.proxy.username`` and ``acquiring.api.proxy.password`` if the proxy requires authentication.
 
-.. code:: bash
-
-   pip install mock mockito
+The proxy integration tests are skipped if ``acquiring.api.proxy.uri`` is not set.
 
 The following commands can now be executed from the ``tests`` directory to execute the tests:
 

@@ -10,13 +10,13 @@ from worldline.acquiring.sdk.communicator import Communicator
 from worldline.acquiring.sdk.communicator_configuration import CommunicatorConfiguration
 from worldline.acquiring.sdk.factory import Factory
 from worldline.acquiring.sdk.json.default_marshaller import DefaultMarshaller
+from worldline.acquiring.sdk.proxy_configuration import ProxyConfiguration
 from worldline.acquiring.sdk.v1.domain.amount_data import AmountData
 from worldline.acquiring.sdk.v1.domain.api_payment_request import ApiPaymentRequest
 from worldline.acquiring.sdk.v1.domain.api_payment_resource import ApiPaymentResource
 from worldline.acquiring.sdk.v1.domain.api_payment_response import ApiPaymentResponse
 from worldline.acquiring.sdk.v1.domain.card_data_for_dcc import CardDataForDcc
 from worldline.acquiring.sdk.v1.domain.card_payment_data import CardPaymentData
-from worldline.acquiring.sdk.v1.domain.e_commerce_data import ECommerceData
 from worldline.acquiring.sdk.v1.domain.get_dcc_rate_request import GetDccRateRequest
 from worldline.acquiring.sdk.v1.domain.get_dcc_rate_response import GetDccRateResponse
 from worldline.acquiring.sdk.v1.domain.payment_references import PaymentReferences
@@ -44,6 +44,10 @@ if MERCHANT_ID == 'None':
     raise EnvironmentError("could not access environment variable acquiring.api.merchantId required for testing")
 if ACQUIRER_ID == 'None':
     raise EnvironmentError("could not access environment variable acquiring.api.acquirerId required for testing")
+# PROXY_URI, PROXY_USERNAME and PROXY_PASSWORD are optional; without PROXY_URI the proxy tests are skipped
+PROXY_URI = os.getenv("acquiring.api.proxy.uri")
+PROXY_USERNAME = os.getenv("acquiring.api.proxy.username")
+PROXY_PASSWORD = os.getenv("acquiring.api.proxy.password")
 
 
 def create_communicator_configuration(properties_url=PROPERTIES_URL_OAUTH2, max_connections=None):
@@ -82,7 +86,8 @@ def create_client(max_connections=None):
 
 
 def create_client_with_proxy(max_connections=None):
-    configuration = create_communicator_configuration(PROPERTIES_URL_PROXY, max_connections=max_connections)
+    configuration = create_communicator_configuration(max_connections=max_connections)
+    configuration.proxy_configuration = ProxyConfiguration.from_uri(PROXY_URI, PROXY_USERNAME, PROXY_PASSWORD)
     return Factory.create_client_from_configuration(configuration)
 
 
